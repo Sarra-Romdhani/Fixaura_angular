@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="welcome-message">
+    <h1>Welcome to Fixaura</h1>
+    <p>Choose the category of services you need</p>
+  </div>
+
+  <div class="button-container">
+    <div *ngFor="let button of buttons" class="button-wrapper" [ngStyle]="{
+      'left': 'calc(50% + ' + button.position.x + 'px)',
+      'top': 'calc(50% + ' + button.position.y + 'px)'
+    }">
+      <div class="button" [ngStyle]="{
+        'width.px': button.size,
+        'height.px': button.size
+      }">
+        <div *ngIf="button.emojis.length === 1" class="emoji">
+          {{ button.emojis[0] }}
+        </div>
+        <div *ngIf="button.emojis.length > 1" class="emoji-stack">
+          <div *ngFor="let emoji of button.emojis; let i = index" class="emoji" [ngStyle]="getEmojiPosition(i, button.emojis.length, button.size)">
+            {{ emoji }}
+          </div>
+        </div>
+      </div>
+      <div class="category-label">
+        {{ button.label }}
+      </div>
+    </div>
+  </div>
+</div>
