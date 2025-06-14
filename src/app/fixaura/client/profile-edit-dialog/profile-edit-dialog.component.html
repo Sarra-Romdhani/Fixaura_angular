@@ -1,0 +1,50 @@
+<mat-dialog-content>
+  <h2>Modifier les informations personnelles</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name" required>
+      <mat-error *ngIf="editForm.get('name')?.hasError('required')">
+        Le nom est requis
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Téléphone</mat-label>
+      <input matInput formControlName="phone" required>
+      <mat-error *ngIf="editForm.get('phone')?.hasError('required')">
+        Le téléphone est requis
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required>
+      <mat-error *ngIf="editForm.get('email')?.hasError('required')">
+        L'email est requis
+      </mat-error>
+      <mat-error *ngIf="editForm.get('email')?.hasError('email')">
+        Veuillez entrer un email valide
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="address" required>
+      <mat-error *ngIf="editForm.get('address')?.hasError('required')">
+        L'adresse est requise
+      </mat-error>
+    </mat-form-field>
+
+    <div class="image-upload">
+      <label for="imageUpload">Photo de profil</label>
+      <input id="imageUpload" type="file" accept="image/*" (change)="onFileSelected($event)">
+      <img [src]="imagePreview || 'assets/images/placeholder1.jpg'" alt="Aperçu" class="image-preview">
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-raised-button color="primary" [disabled]="!editForm.valid" (click)="onSubmit()">Enregistrer</button>
+</mat-dialog-actions>

@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="header">
+    <h1>FixAura</h1>
+  </div>
+  <form>
+    <div class="form-group">
+      <div class="select-wrapper">
+        <select id="serviceType" name="serviceType" [(ngModel)]="selectedServiceType" (change)="onServiceTypeChange($event)">
+          <option value="">Sélectionnez un type de service</option>
+          <option value="Réparations et entretien">Réparations et entretien</option>
+          <option value="Maison et aménagement">Maison et aménagement</option>
+          <option value="Santé">Santé</option>
+          <option value="Beauté">Beauté</option>
+          <option value="Déménagement et transport">Déménagement et transport</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="selectedServiceType">
+      <div class="select-wrapper">
+        <select id="role" name="role">
+          <option value="">Sélectionnez un rôle</option>
+          <option *ngFor="let role of serviceRoles[selectedServiceType]" [value]="role">{{ role }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="status">Statut</label>
+      <div class="radio-group">
+        <input type="radio" id="independant" name="status" value="independant" (change)="onStatusChange('independant')" [checked]="selectedStatus === 'independant'">
+        <label for="independant">Indépendant</label>
+        <input type="radio" id="societe" name="status" value="societe" (change)="onStatusChange('societe')" [checked]="selectedStatus === 'societe'">
+        <label for="societe">Société</label>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="selectedStatus === 'independant'">
+      <div class="input-icon">
+        <span class="icon cnss-icon"></span>
+        <input type="text" id="cnss" name="cnss" placeholder="Numéro CNSS">
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="selectedStatus === 'societe'">
+      <div class="input-icon">
+        <span class="icon matricule-icon"></span>
+        <input type="text" id="matricule" name="matricule" placeholder="Matricule de la société">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-icon">
+        <span class="icon dollar-icon"></span>
+        <input type="text" id="prixMax" name="prixMax" placeholder="Prix maximum">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-icon">
+        <span class="icon facebook-icon"></span>
+        <input type="text" id="facebook" name="facebook" placeholder="Facebook (Optionnel)">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-icon">
+        <span class="icon instagram-icon"></span>
+        <input type="text" id="instagram" name="instagram" placeholder="Instagram (Optionnel)">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-icon">
+        <span class="icon website-icon"></span>
+        <input type="text" id="website" name="website" placeholder="Website (Optionnel)">
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="submit-button" (click)="onNext()">Suivant</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,96 @@
+/* Remove default margin and padding from the body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.container {
+  position: relative;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: #F4B940;
+  display: flex;
+  flex-direction: column; /* Stack title and buttons vertically */
+  justify-content: flex-start; /* Align title at the top */
+  align-items: center;
+  overflow: hidden;
+}
+
+.welcome-message {
+  text-align: center;
+  margin-top: 80px; /* Add space between title and buttons */
+}
+
+.welcome-message h1 {
+  font-size: 56px; /* Bigger font size */
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  margin: 0; /* Remove default margin */
+}
+
+.welcome-message p {
+  font-size: 21px; /* Bigger font size */
+  color: #333;
+  font-weight: bold;
+  margin: 0; /* Remove default margin */
+}
+
+.button-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 40px; /* Add space between title and buttons */
+}
+
+.button-wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column; /* Stack button and label vertically */
+  align-items: center; /* Center button and label horizontally */
+}
+
+.button {
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Softer shadow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease; /* Add a hover effect */
+}
+
+.button:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.emoji {
+  font-size: 50px; /* Slightly smaller emoji size */
+}
+
+.emoji-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.emoji-stack .emoji {
+  position: absolute;
+  font-size: 30px; /* Slightly smaller emoji size */
+}
+
+.category-label {
+  font-size: 20px; /* Bigger font size */
+  color: white; /* White text */
+  font-weight: bold;
+  margin-top: 10px; /* Space between button and label */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.2s ease; /* Smooth transition */
+}
+
+.button-wrapper:hover .category-label {
+  opacity: 1; /* Show label on hover */
+}

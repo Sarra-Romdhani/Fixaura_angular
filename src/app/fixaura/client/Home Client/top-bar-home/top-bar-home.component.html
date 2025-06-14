@@ -1,0 +1,19 @@
+<div class="search-section">
+  <h2>Maison</h2>
+  <div class="search-bar">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearch()"
+      placeholder="Recherche dans la catégorie"
+    />
+  </div>
+  <div class="nav-tabs">
+    <span routerLink="/client/top-bar-home/home" [queryParams]="queryParams">Maison</span>
+    <span routerLink="/client/top-bar-home/reservation" [queryParams]="queryParams">Réservations</span>
+    <span routerLink="/client/top-bar-home/message" [queryParams]="queryParams">Messages</span>
+    <span routerLink="/client/top-bar-home/discuter-avec-ai" [queryParams]="queryParams">Discuter avec AI</span>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,72 @@
+<div class="search-container">
+  <div class="search-bar">
+    <mat-icon>search</mat-icon>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+      placeholder="Introduit le nom du prestataire"
+    />
+  </div>
+  <div class="filter-buttons">
+    <button mat-stroked-button (click)="toggleNearestLocation()">
+      <mat-icon>location_on</mat-icon> Nearest Location
+    </button>
+    <button mat-stroked-button (click)="toggleJobDropdown()">
+      <mat-icon>build</mat-icon> Profession
+    </button>
+  </div>
+  <div class="job-dropdown" [ngClass]="{ 'visible': showJobDropdown }">
+    <div class="custom-mat-select-panel">
+      <div class="job-option" (click)="selectJob('')" [ngClass]="{ 'mat-selected': !selectedJob }">
+        Toutes les professions
+      </div>
+      <div
+        class="job-option"
+        *ngFor="let job of jobs"
+        (click)="selectJob(job)"
+        [ngClass]="{ 'mat-selected': selectedJob === job }"
+      >
+        {{ job }}
+      </div>
+    </div>
+    <div class="no-jobs" [ngClass]="{ 'visible': jobs.length === 0 }">
+      Aucune profession disponible pour cette catégorie.
+    </div>
+  </div>
+  <div class="price-slider">
+    <label>Prix maximum: DT {{ maxPrice }}</label>
+    <input
+      type="range"
+      [(ngModel)]="maxPrice"
+      (ngModelChange)="onPriceChange()"
+      min="0"
+      max="500"
+      step="10"
+      class="max-price-slider"
+    />
+  </div>
+  <div class="loading-state" *ngIf="loading">
+    <p>Chargement des prestataires...</p>
+  </div>
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  <div class="results" *ngIf="!loading && filteredProviders.length > 0; else noResults">
+    <div class="provider-card" *ngFor="let provider of filteredProviders">
+      <img [src]="provider.image || 'https://via.placeholder.com/50'" alt="{{ provider.name }}" class="provider-image" />
+      <div class="provider-info">
+        <h3>{{ provider.name }}</h3>
+        <p>{{ provider.job }}</p>
+      </div>
+      <button mat-raised-button (click)="viewProfile(provider)">Voir le profil</button>
+    </div>
+  </div>
+  <ng-template #noResults>
+    <div class="no-results" *ngIf="!loading">
+      <mat-icon>sentiment_dissatisfied</mat-icon>
+      <p>Oups ! Aucun prestataire trouvé.</p>
+      <p>Essayez un autre nom ou profession.</p>
+    </div>
+  </ng-template>
+</div>

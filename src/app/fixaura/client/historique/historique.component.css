@@ -1,0 +1,129 @@
+.historique-container {
+  padding: 20px;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%; /* Full width */
+}
+
+.header mat-icon {
+  margin-right: 10px;
+  color: #757575;
+  cursor: pointer;
+}
+
+.header h1 {
+  color: #333;
+  margin: 0;
+  font-size: 24px;
+  flex-grow: 1;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%; /* Full width */
+}
+
+.filter {
+  padding: 5px 15px;
+  margin: 0 10px;
+  border-radius: 15px;
+  background-color: #f5f5f5;
+  color: #757575;
+  cursor: pointer;
+}
+
+.filter.active {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.bookings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Full width */
+}
+
+.booking-card {
+  background-color: #f5f5f5; /* Light gray card */
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 100%; /* Full width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%; /* Full width */
+}
+
+.provider-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.details h2 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.details p {
+  margin: 5px 0;
+  color: #757575;
+  display: flex;
+  align-items: center;
+}
+
+.details mat-icon {
+  margin-right: 5px;
+  font-size: 16px;
+  color: #ff9800;
+}
+
+.status {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #757575;
+}
+
+.status.canceled {
+  color: #ff9800;
+}
+
+.status.completed {
+  color: #ff9800;
+}
+
+.action-btn {
+  background-color: #ffca28; /* Light yellow button */
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%; /* Full width */
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.action-btn:hover {
+  background-color: #ffb300;
+  color: #fff;
+}

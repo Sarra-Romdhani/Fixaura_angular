@@ -1,0 +1,56 @@
+<div class="reservations-container">
+  <div class="search-bar">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearch()"
+      placeholder="Rechercher par service"
+    />
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="reservations-list" *ngIf="!loading && filteredReservations.length > 0">
+    <div class="reservation-card" *ngFor="let reservation of filteredReservations">
+      <div class="card-header">
+        <h3>{{ reservation.service }}</h3>
+        <span class="status-badge" [ngClass]="{
+          'pending': reservation.status === 'pending',
+          'confirmed': reservation.status === 'confirmed',
+          'waiting': reservation.status === 'waiting'
+        }">{{ reservation.status | titlecase }}</span>
+      </div>
+      <div class="card-details">
+        <p>
+          <mat-icon class="detail-icon">event</mat-icon>
+          Date: {{ reservation.date !== 'Date inconnue' ? (reservation.date | date: 'dd/MM/yyyy') : reservation.date }}
+        </p>
+        <p>
+          <mat-icon class="detail-icon">access_time</mat-icon>
+          Heure: {{ reservation.time }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!loading && filteredReservations.length === 0 && !errorMessage">
+    <mat-icon class="empty-icon">sentiment_dissatisfied</mat-icon>
+    <p>Aucune réservation active trouvée.</p>
+  </div>
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="reservation-card skeleton" *ngFor="let i of [1,2,3]">
+      <div class="card-header">
+        <div class="skeleton-text skeleton-title"></div>
+        <div class="skeleton-badge"></div>
+      </div>
+      <div class="card-details">
+        <div class="skeleton-text"></div>
+        <div class="skeleton-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
