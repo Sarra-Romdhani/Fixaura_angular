@@ -1,0 +1,69 @@
+<div class="dialog-content" [class.dark-mode]="isDarkMode">
+  <ng-container *ngIf="data.isDateTimePicker">
+    <h2 mat-dialog-title [style.color]="isDarkMode ? '#0288d1' : '#ff9800'">Select Date and Time</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="dateControl" [min]="minDate" [max]="maxDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dateControl.touched && dateControl.hasError('required')">
+        Date is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Time (HH:mm)</mat-label>
+      <input matInput [formControl]="timeControl" placeholder="HH:mm" pattern="([0-1]?[0-9]|2[0-3]):[0-5][0-9]">
+      <mat-error *ngIf="timeControl.touched && timeControl.hasError('required')">
+        Time is required
+      </mat-error>
+      <mat-error *ngIf="timeControl.touched && timeControl.hasError('pattern')">
+        Invalid time format (HH:mm)
+      </mat-error>
+    </mat-form-field>
+    <div class="dialog-actions">
+      <button mat-button 
+              [style.backgroundColor]="isDarkMode ? '#b0bec5' : '#616161'"
+              [style.color]="isDarkMode ? '#ffffff' : '#ffffff'"
+              (click)="onCancel()">Cancel</button>
+      <button mat-button 
+              [style.backgroundColor]="isDarkMode ? '#0288d1' : '#ff9800'"
+              [style.color]="isDarkMode ? '#ffffff' : '#ffffff'"
+              [disabled]="!dateControl.valid || !timeControl.valid"
+              (click)="onConfirm()">Confirm</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="data.isConfirmation">
+    <mat-icon class="warning-icon" [style.color]="isDarkMode ? '#ef5350' : '#d32f2f'">warning_amber</mat-icon>
+    <h2 mat-dialog-title [style.color]="isDarkMode ? '#ef5350' : '#d32f2f'">Confirm Delete</h2>
+    <p [style.color]="isDarkMode ? '#ffffff' : '#212121'">Are you sure you want to delete this service?</p>
+    <div class="dialog-actions">
+      <button mat-button 
+              [style.backgroundColor]="isDarkMode ? '#b0bec5' : '#616161'"
+              [style.color]="isDarkMode ? '#ffffff' : '#ffffff'"
+              (click)="onCancel()">Cancel</button>
+      <button mat-button 
+              [style.backgroundColor]="isDarkMode ? '#ef5350' : '#d32f2f'"
+              [style.color]="isDarkMode ? '#ffffff' : '#ffffff'"
+              (click)="onDelete()">Delete</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!data.isDateTimePicker && !data.isConfirmation">
+    <mat-icon [style.color]="data.isConfirmed ? (isDarkMode ? '#0288d1' : '#ff9800') : (isDarkMode ? '#ffb300' : '#ffa726')">
+      {{ data.isConfirmed ? 'check_circle' : 'access_time' }}
+    </mat-icon>
+    <h2 mat-dialog-title [style.color]="data.isConfirmed ? (isDarkMode ? '#0288d1' : '#ff9800') : (isDarkMode ? '#ffb300' : '#ffa726')">
+      {{ data.isConfirmed ? 'Booking Confirmed' : 'En liste d\'attente' }}
+    </h2>
+    <p [style.color]="isDarkMode ? '#ffffff' : '#212121'">
+      {{ data.isConfirmed ? 'This service has been added to your bookings.' : 'Vous êtes sur la liste d\'attente' }}
+    </p>
+    <div class="dialog-actions">
+      <button mat-button 
+              [style.backgroundColor]="data.isConfirmed ? (isDarkMode ? '#0288d1' : '#ff9800') : (isDarkMode ? '#ffb300' : '#ffa726')"
+              [style.color]="isDarkMode ? '#ffffff' : '#ffffff'"
+              (click)="onCancel()">OK</button>
+    </div>
+  </ng-container>
+</div>

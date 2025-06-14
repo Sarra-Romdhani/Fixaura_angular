@@ -1,0 +1,108 @@
+<header class="toolbar">
+  <button mat-icon-button (click)="goBack()" aria-label="Retour">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+  <span>Réserver</span>
+</header>
+
+<div class="container">
+  <!-- Background Icons Layer -->
+  <div class="icon-background">
+    <span class="icon">💆</span>
+    <span class="icon">💅</span>
+    <span class="icon">👷‍♀️</span>
+    <span class="icon">🔨</span>
+    <span class="icon">🔧</span>
+    <span class="icon">🛠</span>
+    <span class="icon">🪚</span>
+    <span class="icon">🪓</span>
+    <span class="icon">💊</span>
+    <span class="icon">🩺</span>
+    <span class="icon">💉</span>
+    <span class="icon">🧹</span>
+    <span class="icon">👩‍🌾</span>
+    <span class="icon">🧖‍♀️</span>
+    <span class="icon">💇‍♀️</span>
+  </div>
+
+  <div class="form-field" *ngIf="isLoading" style="text-align: center;">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <form [formGroup]="reservationForm" (ngSubmit)="submitReservation()" [class.hidden]="isLoading">
+    <!-- Date -->
+    <div class="form-field">
+      <label class="form-label">Date</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Choisir une date</mat-label>
+        <input matInput [matDatepicker]="datePicker" formControlName="date" [min]="minDate" [max]="maxDate" readonly>
+        <mat-datepicker-toggle matSuffix [for]="datePicker">
+          <i class="bi bi-calendar" matDatepickerToggleIcon></i>
+        </mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+        <mat-error *ngIf="reservationForm.get('date')?.hasError('required')">
+          Veuillez sélectionner une date
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Time -->
+    <div class="form-field">
+      <label class="form-label">Créneau horaire</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Heure</mat-label>
+        <input matInput type="time" formControlName="time" placeholder="HH:mm">
+        <i class="bi bi-chevron-down" matSuffix></i>
+        <mat-error *ngIf="reservationForm.get('time')?.hasError('required')">
+          Veuillez sélectionner une heure
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Service -->
+    <div class="form-field">
+      <label class="form-label">Service</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Entrer le service</mat-label>
+        <input matInput formControlName="service">
+        <mat-error *ngIf="reservationForm.get('service')?.hasError('required')">
+          Veuillez entrer un service
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Request -->
+    <div class="form-field">
+      <label class="form-label">Demande</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Votre demande...</mat-label>
+        <textarea matInput formControlName="request" rows="3"></textarea>
+        <mat-error *ngIf="reservationForm.get('request')?.hasError('required')">
+          Veuillez entrer une demande
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Price -->
+    <div class="form-field">
+      <label class="form-label">Prix (TND)</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Entrer le prix</mat-label>
+        <input matInput type="number" step="0.01" formControlName="price">
+        <mat-error *ngIf="reservationForm.get('price')?.hasError('required')">
+          Veuillez entrer un prix
+        </mat-error>
+        <mat-error *ngIf="reservationForm.get('price')?.hasError('pattern')">
+          Veuillez entrer un prix valide
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-field">
+      <button mat-raised-button color="primary" type="submit" [disabled]="isLoading" class="full-width">
+        {{ isLoading ? 'Envoi...' : 'Réserver' }}
+      </button>
+    </div>
+  </form>
+</div>

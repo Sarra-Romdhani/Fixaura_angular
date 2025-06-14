@@ -1,0 +1,28 @@
+<!-- 
+<div class="map-container">
+  <mat-toolbar class="app-bar">
+    <button class="btn btn-link back-icon" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <span>Track Prestataire (ETA: {{ eta }})</span>
+  </mat-toolbar>
+  <div id="map" class="map"></div>
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+  </div>
+</div> -->
+
+<div class="map-container">
+  <mat-toolbar class="app-bar">
+    <button class="btn btn-link back-icon" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <div class="location-info">
+      <span>Track Prestataire (ETA: {{ eta }})</span>
+    </div>
+  </mat-toolbar>
+  <div id="map" class="map"></div>
+  <div *ngIf="isLoading" class="loading-overlay">
+    <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+  </div>
+</div>

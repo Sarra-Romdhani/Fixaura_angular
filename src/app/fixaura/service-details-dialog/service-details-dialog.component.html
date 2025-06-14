@@ -1,0 +1,33 @@
+<div class="dialog-container" [ngClass]="{'dark-mode': isDarkMode}">
+  <h2 class="dialog-title">{{ service.title }}</h2>
+  <div class="dialog-image">
+    <img
+      *ngIf="service.photo"
+      [src]="getImageUrl()"
+      alt="Service Image"
+      class="service-image"
+      (error)="handleImageError($event)"
+      loading="lazy"
+    >
+    <i class="bi bi-image-fill placeholder-icon" [ngStyle]="{'display': service.photo && !imageError ? 'none' : 'block'}"></i>
+  </div>
+  <div class="dialog-section">
+    <h3>Description</h3>
+    <p>{{ service.description || 'No description available' }}</p>
+  </div>
+  <div class="dialog-section">
+    <div class="info-row">
+      <i class="bi bi-clock-fill"></i>
+      <span>{{ service.estimatedDuration ? service.estimatedDuration + ' min' : 'Duration not specified' }}</span>
+    </div>
+    <div class="info-row">
+      <i class="bi bi-currency-dollar"></i>
+      <span>{{ service.price ? service.price + ' DT' : 'Price not set' }}</span>
+    </div>
+  </div>
+  <div class="dialog-actions">
+    <button class="btn creative-close-button" (click)="closeDialog()">
+      <span>Close</span>
+    </button>
+  </div>
+</div>

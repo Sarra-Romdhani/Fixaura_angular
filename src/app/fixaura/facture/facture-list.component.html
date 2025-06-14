@@ -1,0 +1,40 @@
+<mat-toolbar color="amber">
+  <button mat-icon-button [disabled]="isLoading" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+  <span>Liste des Factures</span>
+</mat-toolbar>
+
+<div class="container" *ngIf="isLoading; else content">
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+
+<ng-template #content>
+  <div class="container" *ngIf="errorMessage">
+    <p class="error">{{ errorMessage }}</p>
+  </div>
+  <div class="container" *ngIf="!errorMessage && factures.length === 0">
+    <p class="no-data">Aucune facture trouvée</p>
+  </div>
+
+  <div class="facture-list" *ngIf="!errorMessage && factures.length > 0">
+    <mat-card *ngFor="let facture of factures" (click)="navigateToDetails(facture)" class="facture-card">
+      <div class="card-content">
+        <div class="icon-container">
+          <i class="bi bi-receipt"></i>
+        </div>
+        <div class="details">
+          <div class="header">
+            <span class="service">{{ facture.service }}</span>
+            <span *ngIf="isRecent(facture)" class="recent-badge">Récent</span>
+          </div>
+          <mat-divider></mat-divider>
+          <p>Date: {{ facture.date | date:'shortDate' }}</p>
+          <p>Prix: {{ facture.price ? (facture.price | number:'1.2-2') + ' DT' : '0.00 DT' }}</p>
+          <p>Lieu: {{ facture.location || 'Non spécifié' }}</p>
+          <span *ngIf="facture.discountApplied" class="discount">Remise Appliquée</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</ng-template>

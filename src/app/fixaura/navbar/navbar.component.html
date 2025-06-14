@@ -1,0 +1,51 @@
+<mat-toolbar class="bottom-nav">
+  <button
+    class="nav-btn"
+    (click)="onItemTapped(0)"
+    [ngClass]="{'active': currentIndex === 0}"
+    aria-label="Accueil"
+    [attr.aria-current]="currentIndex === 0 ? 'page' : null"
+    matRipple
+  >
+    <i class="bi" [ngClass]="currentIndex === 0 ? 'bi-house-fill' : 'bi-house'"></i>
+    <span class="nav-label">Accueil</span>
+    <span class="active-indicator" *ngIf="currentIndex === 0"></span>
+  </button>
+  <button
+    class="nav-btn"
+    (click)="onItemTapped(1)"
+    [ngClass]="{'active': currentIndex === 1}"
+    [attr.aria-label]="'Messages' + (unreadMessagesCount > 0 ? ' (' + unreadMessagesCount + ' non lus)' : '')"
+    [attr.aria-current]="currentIndex === 1 ? 'page' : null"
+    matRipple
+  >
+    <i class="bi" [ngClass]="currentIndex === 1 ? 'bi-chat-fill' : 'bi-chat'"></i>
+    <span class="badge" *ngIf="unreadMessagesCount > 0">{{ unreadMessagesCount }}</span>
+    <span class="nav-label">Messages</span>
+    <span class="active-indicator" *ngIf="currentIndex === 1"></span>
+  </button>
+  <button
+    class="nav-btn"
+    (click)="onItemTapped(2)"
+    [ngClass]="{'active': currentIndex === 2}"
+    aria-label="Réservations"
+    [attr.aria-current]="currentIndex === 2 ? 'page' : null"
+    matRipple
+  >
+    <i class="bi" [ngClass]="currentIndex === 2 ? 'bi-calendar-fill' : 'bi-calendar'"></i>
+    <span class="nav-label">Réservations</span>
+    <span class="active-indicator" *ngIf="currentIndex === 2"></span>
+  </button>
+  <button
+    class="nav-btn"
+    (click)="onItemTapped(3)"
+    [ngClass]="{'active': currentIndex === 3}"
+    aria-label="Profil"
+    [attr.aria-current]="currentIndex === 3 ? 'page' : null"
+    matRipple
+  >
+    <i class="bi" [ngClass]="currentIndex === 3 ? 'bi-person-fill' : 'bi-person'"></i>
+    <span class="nav-label">Profil</span>
+    <span class="active-indicator" *ngIf="currentIndex === 3"></span>
+  </button>
+</mat-toolbar>

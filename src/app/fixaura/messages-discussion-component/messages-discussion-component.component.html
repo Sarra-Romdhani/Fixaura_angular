@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discussion</title>
+  <!-- Lien vers Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="discussion-container">
+    <!-- <mat-toolbar class="app-bar">
+      <span class="btn-link" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i>
+      </span>
+      <div class="user-info">
+        <img
+          [src]="userImage || 'https://via.placeholder.com/40'"
+          alt="{{ userName }}"
+          class="user-image"
+        />
+        <span>{{ userName }}</span>
+      </div>
+    </mat-toolbar> -->
+    <mat-toolbar class="app-bar">
+    <span class="btn-link" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+    </span>
+    <div class="user-info" *ngIf="!isLoading; else loadingTemplate">
+      <img
+        [src]="userImage || 'https://via.placeholder.com/40'"
+        alt="{{ userName }}"
+        class="user-image"
+      />
+      <span>{{ userName }}</span>
+    </div>
+    <ng-template #loadingTemplate>
+      <span>Loading...</span>
+    </ng-template>
+  </mat-toolbar>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="messages-list">
+      <div *ngIf="messages.length === 0 && !errorMessage" class="no-messages">
+        No messages yet
+      </div>
+      <div
+        *ngFor="let message of messages"
+        class="message"
+        [ngClass]="{ 'message-me': message.isMe, 'message-other': !message.isMe }"
+      >
+        <div class="message-content">
+          <ng-container *ngIf="getMessageContent(message) | async as msgContent">
+            <div [ngSwitch]="msgContent.type">
+              <div *ngSwitchCase="'text'" class="text-message">
+                {{ msgContent.content }}
+              </div>
+              <div
+                *ngSwitchCase="'rating'"
+                class="rating-prompt"
+                (click)="handleRatingClick(msgContent.reservationId || '')"
+              >
+                <strong>Évaluation de la réservation</strong>
+                <p>{{ msgContent.content }}</p>
+                <strong>Appuyez pour évaluer</strong>
+              </div>
+              <div *ngSwitchCase="'qr'" class="qr-code">
+                <p>Réservation confirmée</p>
+                <img
+                  [src]="msgContent.qrCodeUrl"
+                  alt="QR Code"
+                  style="width: 200px; height: 200px;"
+                />
+              </div>
+              <div
+                *ngSwitchCase="'location'"
+                class="location-card"
+                (click)="handleCardClick(msgContent.reservationId || '', msgContent.lat, msgContent.lng)"
+              >
+                <strong>Location Card</strong>
+                <p>Lat: {{ msgContent.lat }}, Lng: {{ msgContent.lng }}</p>
+                <strong>Tap to view on map</strong>
+              </div>
+              <div *ngSwitchCase="'error'" class="error-message">
+                {{ msgContent.error }}
+              </div>
+            </div>
+          </ng-container>
+          <div class="message-meta">
+            <!-- Show date and time; adjust format based on whether the message is from today -->
+            <span>
+              {{ message.timestamp | date: (isToday(message.timestamp) ? 'HH:mm' : 'MMM d, HH:mm') }}
+            </span>
+            <i
+              *ngIf="message.isMe && message.isRead"
+              class="bi bi-check2-all"
+            ></i>
+            <i
+              *ngIf="message.isMe && !message.isRead"
+              class="bi bi-check2"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-message-input">
+      <input
+        [(ngModel)]="newMessage"
+        (keyup.enter)="sendMessage()"
+        type="text"
+        placeholder="Type your message..."
+      />
+      <button (click)="sendMessage()">
+        <i class="bi bi-send-fill"></i>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

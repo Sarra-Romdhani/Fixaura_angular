@@ -1,0 +1,96 @@
+<div class="history-container">
+  <div class="app-bar">
+    <button class="btn btn-link back-button" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+  </div>
+
+  <div class="tabs-container">
+    <div class="tab-button" [class.active]="currentTabIndex === 0" (click)="setTab(0)">
+      Complétées
+    </div>
+    <div class="tab-button" [class.active]="currentTabIndex === 1" (click)="setTab(1)">
+      Annulées
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-container">
+      <i class="bi bi-wifi-off"></i>
+      <h3>Problème de connexion</h3>
+      <p>{{errorMessage}}</p>
+      <button class="btn btn-primary retry-button" (click)="fetchReservations()">Réessayer</button>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && getCurrentReservations().length === 0" class="empty-container">
+      <i class="bi bi-journal-text"></i>
+      <h3>{{currentTabIndex === 0 ? 'Aucune réservation complétée' : 'Aucune réservation annulée'}}</h3>
+      <p>Vos réservations apparaîtront ici une fois disponibles.</p>
+    </div>
+
+    <div *ngIf="!isLoading && !errorMessage && getCurrentReservations().length > 0" class="reservations-list">
+      <div *ngFor="let reservation of getCurrentReservations()" class="reservation-card">
+        <div class="card-header">
+          <span class="service-name">{{reservation.service.toUpperCase()}}</span>
+          <span class="status-badge" [ngClass]="{
+            'completed': reservation.status.toLowerCase() === 'completed',
+            'canceled': reservation.status.toLowerCase() === 'canceled'
+          }">
+            {{reservation.status.toLowerCase() === 'completed' ? 'COMPLÉTÉ' : 'ANNULÉ'}}
+          </span>
+        </div>
+
+        <div class="client-info">
+          <div class="avatar-container">
+            <img [src]="getImageUrl(reservation.client.image)" 
+                 alt="Client avatar" 
+                 class="avatar-img"
+                 (error)="onImageError($event)">
+          </div>
+          <div class="client-details">
+            <h4>{{reservation.client.name}}</h4>
+            <p>{{reservation.client.email}}</p>
+          </div>
+        </div>
+
+        <div class="details-row">
+          <div class="detail-item">
+            <i class="bi bi-calendar"></i>
+            <span>{{reservation.date | date:'dd/MM/yyyy'}}</span>
+          </div>
+          <div class="detail-item">
+            <i class="bi bi-clock"></i>
+            <span>{{reservation.date | date:'HH:mm'}}</span>
+          </div>
+        </div>
+
+        <div class="details-row">
+          <div class="detail-item">
+            <i class="bi bi-geo-alt"></i>
+            <span>{{reservation.location}}</span>
+          </div>
+        </div>
+
+        <div class="details-row" *ngIf="reservation.client.phoneNumber">
+          <div class="detail-item">
+            <i class="bi bi-telephone"></i>
+            <span>{{reservation.client.phoneNumber}}</span>
+          </div>
+        </div>
+
+        <div class="details-row" *ngIf="reservation.price">
+          <div class="detail-item">
+            <i class="bi bi-currency-dollar"></i>
+            <span>{{reservation.price | number:'1.2-2'}} TND</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

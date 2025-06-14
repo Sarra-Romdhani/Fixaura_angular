@@ -1,0 +1,329 @@
+/* Dark mode CSS with amber/yellow replaced by blue */
+.container-fluid {
+  background-color: #424242;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 20px;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transform: perspective(500px) rotateX(5deg);
+  margin: 0;
+}
+
+.card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
+  border: 2px solid var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.image-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.image-container {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 2px solid var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  transition: transform 0.2s;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-container:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.data-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  transition: background-color 0.2s;
+  flex-grow: 1;
+}
+
+.data-item:hover {
+  background-color: rgba(64, 196, 255, 0.1); /* Adjusted to blue #40C4FF with opacity */
+  border-radius: 4px;
+}
+
+.data-item i {
+  font-size: 16px;
+  color: var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+}
+
+.text-amber {
+  color: var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+}
+
+.text-black {
+  color: #000000;
+}
+
+.text-white-70 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.text-danger {
+  color: #F44336;
+}
+
+.fs-4 {
+  font-size: 20px;
+}
+
+.mb-1 {
+  margin-bottom: 6px;
+}
+
+.mb-3 {
+  margin-bottom: 4px;
+}
+
+.mb-3.image-upload-container {
+  margin-bottom: 2px;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.image-title-container h5 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.btn-link {
+  color: var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  text-decoration: none;
+  padding: 6px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.2s;
+  margin-right: 16px;
+}
+
+.btn-link.text-danger {
+  color: #F44336;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.btn-link:hover {
+  background-color: rgba(64, 196, 255, 0.1); /* Adjusted to blue #40C4FF with opacity */
+  transform: scale(1.1);
+}
+
+.btn-link i {
+  font-size: 18px;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  display: flex;
+  gap: 6px;
+}
+
+.button-container .btn {
+  border: none;
+  background-color: transparent;
+}
+
+.spinner-border {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+  color: var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.fab:hover {
+  background-color: var(--accent-blue); /* #0288D1 in dark mode, replaces #FFA000 */
+  transform: scale(1.1);
+}
+
+.fab i {
+  font-size: 20px;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal Styles */
+.modal-content {
+  background-color: #424242;
+  border: 2px solid var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  border-radius: 6px;
+  color: #FFFFFF;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  padding: 12px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal-body {
+  padding: 12px;
+  font-size: 14px;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--accent); /* #40C4FF in dark mode, replaces #DBC107 */
+  padding: 12px;
+}
+
+.btn-secondary {
+  background-color: #757575;
+  border: none;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #616161;
+}
+
+.btn-danger {
+  background-color: #F44336;
+  border: none;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-danger:hover {
+  background-color: #D32F2F;
+}
+
+/* Ensure inputs and selects are full width with amber border */
+.form-control, .form-select {
+  width: 100% !important;
+  box-sizing: border-box;
+  border: 1px solid var(--accent); /* #40C4FF in dark mode, replaces #FFC107 */
+}
+
+.form-label {
+  margin-bottom: 4px;
+}
+
+.image-upload {
+  width: 100%;
+  height: 200px;
+  cursor: pointer;
+}
+
+.input-lg {
+  height: 46px;
+  font-size: 16px;
+  padding: 6px 10px;
+}
+
+.btn-amber {
+  background-color: var(--accent); /* #40C4FF in dark mode, replaces #FFC107 */
+  border: none;
+  color: #000000;
+}
+
+.btn-amber:hover {
+  background-color: var(--accent-blue); /* #0288D1 in dark mode, replaces #FFA000 */
+}
+
+.btn-amber.btn-xl {
+  height: 70px;
+  line-height: 50px;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 8px;
+}

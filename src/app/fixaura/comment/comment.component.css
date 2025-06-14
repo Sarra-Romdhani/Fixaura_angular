@@ -1,0 +1,349 @@
+/* Dialog content */
+mat-dialog-content {
+  padding: 0;
+  max-height: 100vh; /* Full viewport height */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dialog container */
+.dialog-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Full width of dialog frame */
+  height: 100%; /* Full height of dialog frame */
+  min-height: 0; /* Allow content-driven height */
+  background-color: #E0E0E0; /* Light grey background */
+}
+
+/* Background colors */
+.bg-light-grey {
+  background-color: #E0E0E0;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.bg-amber-600 {
+  background-color: #f59e0b;
+}
+
+.bg-amber-700 {
+  background-color: #d97706;
+}
+
+.bg-amber-100 {
+  background-color: #fefcbf;
+}
+
+/* Text colors */
+.text-black {
+  color: #000000;
+}
+
+.text-dark-grey {
+  color: #616161;
+}
+
+.text-amber-600 {
+  color: #f59e0b;
+}
+
+/* Border colors */
+.border-light-grey {
+  border-color: #E0E0E0;
+}
+
+/* Rounded corners */
+.rounded-lg {
+  border-radius: 6px;
+}
+
+/* Textarea styles */
+.textarea-bordered .mat-form-field-outline {
+  border: 2px solid #000000 !important;
+}
+
+.textarea-bordered .mat-form-field-flex {
+  background-color: #E0E0E0 !important; /* Light grey background */
+  align-items: center;
+  height: 28px; /* Reduced height for smaller textarea */
+}
+
+.textarea-bordered textarea {
+  resize: none;
+  border-radius: 6px;
+  padding: 3px; /* Reduced padding for smaller height */
+  background-color: #E0E0E0; /* Light grey background */
+  color: #000000;
+  line-height: 1.4; /* Adjusted for smaller height */
+}
+
+.textarea-bordered textarea.h-24 {
+  height: 96px !important;
+}
+
+.textarea-bordered textarea.h-32 {
+  height: 128px !important; /* Increased height for edit textarea */
+}
+
+.textarea-bordered textarea.h-10 {
+  height: 24px !important; /* Smaller height for input area */
+}
+
+/* Submit button */
+.submit-button {
+  height: 40px; /* Match textarea height */
+  line-height: 28px;
+  padding: 0 20px; /* Increased padding for wider button */
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+
+/* Disabled and hover states */
+.submit-button:disabled {
+  background-color: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.submit-button:not(:disabled):hover {
+  background-color: #d97706;
+}
+
+/* Alignment */
+.align-middle {
+  vertical-align: middle;
+}
+
+/* Form field */
+mat-form-field {
+  width: 100%;
+  max-width: 75%; /* Limit textarea width to fit wider button */
+  margin: 0;
+}
+
+mat-form-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+mat-form-field .mat-form-field-infix {
+  padding: 2px 0;
+  border-top: 0;
+}
+
+/* Icon button */
+mat-icon-button {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+mat-icon-button i {
+  font-size: 1rem;
+}
+
+/* Padding */
+.p-1 {
+  padding: 2px;
+}
+
+.p-2 {
+  padding: 4px;
+}
+
+/* Margins */
+.mb-1 {
+  margin-bottom: 2px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.mr-2 {
+  margin-right: 4px;
+}
+
+.mr-3 {
+  margin-right: 12px;
+}
+
+.ml-2 {
+  margin-left: 4px;
+}
+
+.mx-2 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.my-2 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Gaps */
+.gap-2 {
+  gap: 8px;
+}
+
+/* Font sizes */
+.text-base {
+  font-size: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+/* Font weights */
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+/* Line height */
+.leading-relaxed {
+  line-height: 1.5;
+}
+
+/* Shadow */
+.shadow-md {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon size */
+.bi-person {
+  font-size: 1.25rem;
+}
+
+/* Width and height */
+.w-10 {
+  width: 40px;
+}
+
+.h-10 {
+  height: 40px;
+}
+
+/* Flex */
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+/* Positioning */
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.top-1 {
+  top: 4px;
+}
+
+.right-1 {
+  right: 4px;
+}
+
+.top-2 {
+  top: 8px;
+}
+
+.right-2 {
+  right: 8px;
+}
+
+/* Comment list */
+.comment-list {
+  flex-grow: 1;
+  max-height: calc(100vh - 60px); /* Adjusted for full height */
+  overflow-y: auto;
+  padding-bottom: 20px; /* Space for input area */
+  background-color: #E0E0E0; /* Light grey background */
+}
+
+/* Fixed input area */
+.fixed-input-area {
+  position: sticky; /* Sticks below comment list */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%; /* Full width */
+  border-top: 1px solid #E0E0E0;
+  z-index: 1000;
+  box-sizing: border-box;
+  background-color: #E0E0E0; /* Light grey background */
+  padding: 2px; /* Compact padding */
+}
+
+/* Form layout */
+.fixed-input-area form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px; /* Space between textarea and button */
+  width: 100%;
+}
+
+/* Comment card */
+.comment-card {
+  padding: 2px; /* Compact padding */
+  margin: 8px; /* Space on all sides (left, right, top, bottom) */
+}
+
+/* Circular Avatar Styles */
+.avatar-container {
+  width: 24px; /* Compact size */
+  height: 24px; /* Compact size */
+  border-radius: 50%; /* Circular shape */
+  overflow: hidden; /* Hide overflow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.avatar-container img {
+  width: 100%; /* Fill container */
+  height: 100%; /* Fill container */
+  border-radius: 50%; /* Circular shape */
+  object-fit: cover; /* Prevent distortion */
+  display: block;
+}
+
+.avatar-container img.error {
+  display: none; /* Hide broken image */
+}
+
+.avatar-container .bi-person {
+  font-size: 1rem; /* Adjusted for smaller avatar */
+  color: #f59e0b; /* Matches text-amber-600 */
+  position: absolute;
+  display: none; /* Hidden by default */
+}
+
+.avatar-container img.error + .bi-person {
+  display: block; /* Show icon when image fails */
+}

@@ -1,0 +1,22 @@
+<div class="dialog-container" cdkTrapFocus>
+  <h2 class="dialog-title">Planning</h2>
+  <mat-spinner *ngIf="isLoading || !isInitialized" [diameter]="40" class="spinner"></mat-spinner>
+  <div *ngIf="!isLoading && isInitialized && hasError" class="error">
+    Échec du chargement des réservations
+    <button mat-raised-button color="primary" (click)="fetchReservations()">Réessayer</button>
+  </div>
+  <div *ngIf="!isLoading && isInitialized && !hasError" class="calendar-container">
+    <mat-calendar
+      [dateClass]="dateClass"
+      [selected]="selectedDate"
+      (selectedChange)="onDateSelected($event)"
+      [startAt]="focusedDay"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      aria-label="Calendrier des réservations">
+    </mat-calendar>
+  </div>
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="closeDialog()">Fermer</button>
+  </div>
+</div>

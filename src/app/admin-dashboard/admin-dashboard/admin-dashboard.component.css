@@ -1,0 +1,165 @@
+.dashboard-container {
+  padding: 20px;
+  /* max-width: 1400px; */
+  margin: 0 auto;
+  background-color: #ffffff; /* White background for the page */
+}
+
+.navbar {
+  background: #ffc107; /* Truer amber background for navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px; /* Increased padding for more space in navbar */
+  height: 80px; /* Increased height for taller navbar */
+width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 50px; /* Increased spacing between navbar links */
+padding: 30px;
+}
+
+.navbar a {
+  color: #ffffff; /* White text for navbar links */
+  font-weight: 500;
+  transition: color 0.3s;
+  padding: 0 16px; /* Increased padding for links */
+}
+
+.navbar a.active {
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+
+.navbar a:hover {
+  color: #e0e0e0;
+}
+
+.navbar .logout-btn {
+  padding: 8px 16px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.navbar .logout-btn:hover {
+  background: #c82333;
+}
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.8em;
+  margin: 0;
+  color: #333333; /* Dark text for header to contrast with white background */
+}
+
+.error {
+  color: #ff4d4d;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  background: #4a2525; /* Darker red for error background */
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #6b2f2f;
+}
+
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  width: 100%;
+  min-width: 200px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+.stat-card:nth-child(1) {
+  background: hwb(30 49% 50% / 0.958); /* Deeper red for Total Clients */
+}
+
+.stat-card:nth-child(2) {
+  background: #149eb3e6; /* Deeper blue for Total Prestataires */
+}
+
+.stat-card:nth-child(3) {
+  background: lch(59.21% 73.45 62.55 / 0.979); /* Deeper green for Total Réservations */
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.chart-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  background: #ffffff; /* White background for chart containers */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-container h3 {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 1.3em;
+  color: #333333; /* Dark text for chart titles to contrast with white background */
+}
+
+.chart-container canvas {
+  max-width: 100%;
+  height: auto;
+  max-height: 320px;
+}
+
+.chart-container .no-data {
+  color: #666666; /* Darker grey for no-data text to contrast with white background */
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+.no-data {
+  color: #ff0000;
+  font-style: italic;
+}

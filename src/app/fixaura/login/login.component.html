@@ -1,0 +1,39 @@
+<div class="page" [ngClass]="{'dark-theme': isDarkTheme}">
+  <img src="/assets/logo.png" alt="TikTak Logo" class="logo" *ngIf="!logoError" (error)="logoError = true">
+  <p *ngIf="logoError" class="error-text">Logo introuvable</p>
+  <h2 class="welcome-text">Welcome To TIKTAK</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="signIn()" class="form">
+    <div class="form-field">
+      <mat-form-field appearance="fill" class="full-width">
+        <span class="input-icon">
+          <i class="bi bi-envelope"></i>
+        </span>
+        <input matInput id="email" formControlName="email" placeholder="Enter email" type="email">
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <mat-form-field appearance="fill" class="full-width">
+        <span class="input-icon">
+          <i class="bi bi-lock"></i>
+        </span>
+        <input matInput id="password" formControlName="password" [type]="isObscured ? 'password' : 'text'" placeholder="Enter password">
+        <span class="toggle-icon" (click)="togglePasswordVisibility()">
+          <i class="bi" [ngClass]="isObscured ? 'bi-eye-slash' : 'bi-eye'"></i>
+        </span>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 6 characters</mat-error>
+      </mat-form-field>
+      <a class="forget-password" (click)="showForgotPasswordNotAvailable()">Forget password?</a>
+    </div>
+    <button mat-raised-button type="submit" class="sign-in-button" [disabled]="isLoading">
+      <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+      <span *ngIf="!isLoading">Sign In</span>
+    </button>
+  </form>
+  <div class="signup-link">
+    <span>Don't have an account?</span>
+    <a (click)="showSignupNotAvailable()" class="signup-text"> Sign up</a>
+  </div>
+</div>

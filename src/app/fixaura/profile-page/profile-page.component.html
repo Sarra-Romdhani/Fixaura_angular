@@ -1,0 +1,148 @@
+
+<div class="container">
+  <div class="actions-top">
+    <button
+      mat-icon-button
+      *ngIf="loggedInUserId != userId"
+      (click)="openFlagDialog()"
+      aria-label="Signaler le prestataire"
+    >
+      <i class="bi bi-flag-fill signal-icon"></i>
+    </button>
+    <button
+      mat-icon-button
+      *ngIf="loggedInUserId == userId"
+      (click)="toggleSettingsPopup()"
+      aria-label="Settings"
+    >
+      <i class="bi bi-gear settings-icon"></i>
+    </button>
+  </div>
+  <div class="settings-dropdown" *ngIf="isSettingsOpen">
+    <mat-nav-list>
+      <mat-list-item (click)="navigateTo('/info-perso/' + userId)">
+        <i class="bi bi-pencil" matListIcon></i>
+        <span>Edit profile</span>
+      </mat-list-item>
+      <mat-list-item (click)="navigateTo('/history/' + userId)">
+        <i class="bi bi-clock-history" matListIcon></i>
+        <span>History</span>
+      </mat-list-item>
+      <mat-list-item (click)="navigateTo('/factures/' + userId)">
+        <i class="bi bi-receipt" matListIcon></i>
+        <span>Factures</span>
+      </mat-list-item>
+      <mat-list-item (click)="navigateTo('/appliances/' + userId)">
+        <i class="bi bi-graph-up" matListIcon></i>
+        <span>Predictions</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-slide-toggle
+          [checked]="themeService.isDarkMode$ | async"
+          (change)="themeService.toggleTheme()"
+          aria-label="Toggle dark mode"
+        >
+          {{ (themeService.isDarkMode$ | async) ? 'Dark' : 'Light' }} Mode
+        </mat-slide-toggle>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="signOut()">
+        <i class="bi bi-box-arrow-right" matListIcon></i>
+        <span>Sign out</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+  <div class="header">
+    <mat-spinner *ngIf="isLoading" [diameter]="40" class="spinner"></mat-spinner>
+    <div *ngIf="!isLoading && hasError" class="error">
+      Échec du chargement du profil
+      <button mat-raised-button color="primary" (click)="fetchProfileData()">Réessayer</button>
+    </div>
+    <div *ngIf="!isLoading && !hasError && !profileData" class="error">
+      Aucun profil trouvé
+    </div>
+    <div *ngIf="!isLoading && !hasError && profileData" class="profile">
+      <div class="profile-layout">
+        <div class="image-container">
+          <img *ngIf="profileData.image" [src]="baseUrl + profileData.image" alt="Profile" class="profile-image image-preview">
+          <i class="bi bi-person-fill" *ngIf="!profileData.image"></i>
+        </div>
+        <div class="info-container">
+          <div class="info-primary">
+            <h2 class="name">{{ profileData.name || 'Nom inconnu' }}</h2>
+            <p class="job" *ngIf="profileData.job">{{ profileData.job }}</p>
+            <div *ngIf="profileData.rating != null" class="rating">
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                <i class="bi bi-star-fill" *ngIf="profileData.rating >= star" [ngClass]="{'star-icon': true}"></i>
+                <i class="bi bi-star" *ngIf="profileData.rating < star" [ngClass]="{'star-icon': true}"></i>
+              </ng-container>
+              <span class="rating-text">({{ profileData.rating.toFixed(1) }}/5, {{ profileData.ratingCount || 0 }} avis)</span>
+            </div>
+            <button mat-raised-button class="amber-button" (click)="openCalendar()">Planning</button>
+          </div>
+          <div class="info-secondary">
+            <div class="contact-details">
+              <p *ngIf="profileData.email">
+                <i class="bi bi-envelope-fill contact-icon"></i> {{ profileData.email }}
+              </p>
+              <p *ngIf="profileData.phoneNumber">
+                <i class="bi bi-telephone-fill contact-icon"></i> {{ profileData.phoneNumber }}
+              </p>
+              <p *ngIf="profileData.businessAddress">
+                <i class="bi bi-geo-alt-fill contact-icon"></i> {{ profileData.businessAddress }}
+              </p>
+            </div>
+            <div class="social-links">
+              <a *ngIf="profileData.facebook" [href]="profileData.facebook" target="_blank" aria-label="Facebook">
+                <i class="bi bi-facebook social-icon"></i>
+              </a>
+              <a *ngIf="profileData.instagram" [href]="profileData.instagram" target="_blank" aria-label="Instagram">
+                <i class="bi bi-instagram social-icon"></i>
+              </a>
+              <a *ngIf="profileData.website" [href]="profileData.website" target="_blank" aria-label="Website">
+                <i class="bi bi-globe social-icon"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button (click)="onTabSelected(0)" [ngClass]="{'active': selectedIndex === 0}">
+      Mes Publications
+      <span class="underline" *ngIf="selectedIndex === 0"></span>
+    </button>
+    <button (click)="onTabSelected(1)" [ngClass]="{'active': selectedIndex === 1}">
+      Mes Services
+      <span class="underline" *ngIf="selectedIndex === 1"></span>
+    </button>
+  </div>
+  <div class="content">
+    <ng-container *ngIf="isAdding; else content">
+      <app-add-publication-dialog *ngIf="selectedIndex === 0" (cancel)="toggleAddForm()"></app-add-publication-dialog>
+      <app-add-service *ngIf="selectedIndex === 1" (cancel)="toggleAddForm()"></app-add-service>
+    </ng-container>
+    <ng-template #content>
+      <app-publication
+        *ngIf="selectedIndex === 0"
+        [userId]="userId"
+        [loggedInUserId]="loggedInUserId"
+        (addPressed)="openAddPublicationDialog()"
+      ></app-publication>
+      <app-service
+        *ngIf="selectedIndex === 1"
+        [userId]="userId"
+        [loggedInUserId]="loggedInUserId"
+        (addPressed)="openAddServiceDialog()"
+      ></app-service>
+    </ng-template>
+  </div>
+  <app-navbar
+    [currentIndex]="currentIndex"
+    [unreadMessagesCount]="unreadMessagesCount"
+    [userId]="userId"
+    [loggedId]="loggedInUserId"
+  ></app-navbar>
+</div>

@@ -1,0 +1,108 @@
+/* 
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+#map {
+  width: 100%;
+  height: calc(100% - 64px); 
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.app-bar {
+  background-color: #0288D1;
+  color: white;
+}
+
+.back-icon {
+  color: white;
+} */
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+#map {
+  width: 100%;
+  height: calc(100% - 64px); /* Adjust for toolbar height */
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.app-bar {
+  color: white;
+  background-color:#FFC107 ;
+}
+
+
+
+.back-icon {
+    color: white;
+  font-size: 1.5rem;
+    background: transparent; /* No background color */
+border: transparent;
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  background: transparent; /* No background color */
+}
+
+.location-info span {
+  background: transparent; /* Ensure text has no background */
+}
+.dark-theme .app-bar {
+  background-color: var(--primary-blue); /* #1976D2 */
+}
+
+/* 
+@media (prefers-color-scheme: light) {
+  .app-bar {
+    background-color: #FFC107; 
+  }
+  .back-icon, .location-info span {
+    color: #000000; 
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .app-bar {
+    background-color: #0288D1;
+  }
+  .back-icon, .location-info span {
+    color: #FFFFFF; 
+  }
+  .back-icon {
+    background-color: transparent;
+    border: none;
+  }
+} */

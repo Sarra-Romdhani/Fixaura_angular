@@ -1,0 +1,134 @@
+<!-- <div class="container" [class.dark-mode]="isDarkMode">
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner-border" [ngClass]="isDarkMode ? 'text-primary' : 'text-warning'" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!isLoading && services.length === 0" class="no-services">
+    <p>No services available</p>
+    <button class="btn refresh-button" [ngClass]="isDarkMode ? 'btn-primary' : 'btn-warning'" (click)="fetchServices()">
+      <i class="bi bi-arrow-repeat"></i> Refresh
+    </button>
+  </div>
+  <div *ngIf="!isLoading && services.length > 0" class="services-list">
+    <div *ngFor="let service of services" class="service-card">
+      <div class="card-content">
+        <div class="image-container">
+          <img *ngIf="service.photo" [src]="baseUrl + service.photo" alt="Service Image" (error)="handleImageError($event)">
+          <i class="bi bi-image-fill" *ngIf="!service.photo"></i>
+        </div>
+        <div class="service-details">
+          <div class="title-row">
+            <h3>{{ service.title }}</h3>
+            <div *ngIf="isOwner" class="dropdown">
+              <button class="amber-dots" type="button" (click)="toggleDropdown(service.id)">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu" [class.show]="dropdownOpen[service.id]">
+                <li>
+                  <div class="dropdown-item" (click)="showEditDialog(service); closeDropdown(service.id)">
+                    <i class="bi bi-pencil-square amber-icon"></i>
+                    <span>Edit</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="dropdown-item" (click)="showDeleteConfirmation(service.id); closeDropdown(service.id)">
+                    <i class="bi bi-trash3-fill red-icon"></i>
+                    <span>Delete</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="duration">
+              <i class="bi bi-clock-fill"></i>
+              {{ service.estimatedDuration }} min
+            </span>
+            <span class="price">
+              <i class="bi bi-currency-dollar"></i>
+              {{ service.price }} DT
+            </span>
+          </div>
+          <p class="description">{{ service.description }}</p>
+        </div>
+      </div>
+      <div *ngIf="!isOwner" class="book-button">
+        <button class="btn btn-outline-primary" (click)="reserveService(service.id)">
+          <i class="bi bi-bookmark-check"></i> Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+  <button *ngIf="isOwner" class="add-button" [class.dark-mode]="isDarkMode" (click)="onAddPressed()" aria-label="Add new service">
+    <i class="bi bi-plus-lg"></i>
+  </button>
+</div> -->
+
+
+<div class="container" [class.dark-mode]="isDarkMode">
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner-border" [ngClass]="isDarkMode ? 'text-primary' : 'text-warning'" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!isLoading && services.length === 0" class="no-services">
+    <p>No services available</p>
+    <button class="btn refresh-button" [ngClass]="isDarkMode ? 'btn-primary' : 'btn-warning'" (click)="fetchServices()">
+      <i class="bi bi-arrow-repeat"></i> Refresh
+    </button>
+  </div>
+  <div *ngIf="!isLoading && services.length > 0" class="services-list">
+    <div *ngFor="let service of services" class="service-card" (click)="showServiceDetails(service)">
+      <div class="card-content">
+        <div class="image-container">
+          <img *ngIf="service.photo" [src]="baseUrl + service.photo" alt="Service Image" (error)="handleImageError($event)">
+          <i class="bi bi-image-fill" *ngIf="!service.photo"></i>
+        </div>
+        <div class="service-details">
+          <div class="title-row">
+            <h3>{{ service.title }}</h3>
+            <div *ngIf="isOwner" class="dropdown" (click)="$event.stopPropagation()">
+              <button class="amber-dots" type="button" (click)="toggleDropdown(service.id)">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu" [class.show]="dropdownOpen[service.id]">
+                <li>
+                  <div class="dropdown-item" (click)="showEditDialog(service); closeDropdown(service.id)">
+                    <i class="bi bi-pencil-square amber-icon"></i>
+                    <span>Edit</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="dropdown-item" (click)="showDeleteConfirmation(service.id); closeDropdown(service.id)">
+                    <i class="bi bi-trash3-fill red-icon"></i>
+                    <span>Delete</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="duration">
+              <i class="bi bi-clock-fill"></i>
+              {{ service.estimatedDuration }} min
+            </span>
+            <span class="price">
+              <i class="bi bi-currency-dollar"></i>
+              {{ service.price }} DT
+            </span>
+          </div>
+          <p class="description">{{ service.description }}</p>
+        </div>
+      </div>
+      <div *ngIf="!isOwner" class="book-button" (click)="$event.stopPropagation()">
+        <button class="btn btn-outline-primary" (click)="reserveService(service.id)">
+          <i class="bi bi-bookmark-check"></i> Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+  <button *ngIf="isOwner" class="add-button" [class.dark-mode]="isDarkMode" (click)="onAddPressed()" aria-label="Add new service">
+    <i class="bi bi-plus-lg"></i>
+  </button>
+</div>

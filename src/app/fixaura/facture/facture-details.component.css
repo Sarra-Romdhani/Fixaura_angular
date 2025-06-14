@@ -1,0 +1,264 @@
+/* Global variables for colors matching Flutter AppColors */
+:root {
+  --amber-medium: #FFB300; /* Matches AppColors.amberMedium */
+  --dark-text-primary: #212121; /* Matches AppColors.darkTextPrimary */
+  --text-primary: #424242; /* Matches AppColors.textPrimary */
+  --card-background: #EEEEEE; /* Matches AppColors.cardBackground */
+  --red-medium: #D32F2F; /* Matches AppColors.redMedium */
+  --dark-grey: #616161; /* Matches AppColors.darkGrey */
+  --text-grey: #9E9E9E; /* Matches AppColors.textGrey */
+  --white-background: #FAFAFA; /* Matches AppColors.whitebackground */
+  --primary: #1976D2; /* For mat-spinner and other Material components */
+}
+
+/* Force light mode by overriding potential dark mode styles */
+:root, [data-theme="dark"], html, body {
+  color-scheme: light !important;
+  background-color: #FAFAFA !important;
+}
+
+/* Page background */
+.page-container {
+  background-color: #FAFAFA;
+  min-height: 100vh;
+  padding: 12px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-primary);
+}
+
+/* App bar */
+.app-bar {
+  background-color: var(--primary) !important;
+  color: #212121 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-bar span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.app-bar button i {
+  color: #212121 !important;
+}
+
+/* Cards */
+.header-card, .section-card {
+  background-color: #EEEEEE;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-card {
+  background-color: #FFB300;
+  color: #212121;
+}
+
+.header-content {
+  padding: 12px;
+}
+
+.header-content h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color:#212121;
+}
+
+.header-content p {
+  font-size: 12px;
+  margin: 4px 0;
+  color:#212121;
+}
+
+.section-card {
+  padding: 10px;
+}
+
+.section-card h2 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFB300;
+  margin: 0 0 8px 0;
+}
+
+.section-content .row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.section-content .label {
+  width: 80px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #212121;
+}
+
+.section-content span:not(.label) {
+  font-size: 12px;
+  color: #212121;
+  flex: 1;
+}
+
+/* Payment table */
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color:#FFB300;
+  margin: 16px 0 8px 0;
+}
+
+.payment-table {
+  border: 1px solid #FFB300;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.table-header, .table-row {
+  display: flex;
+  padding: 8px;
+}
+
+.table-header {
+  background-color: #EEEEEE;
+  color: #212121;
+}
+
+.table-row {
+  border-top: 1px solid #FFB300;
+}
+
+.description {
+  flex: 3;
+  font-size: 12px;
+  color: #212121;
+}
+
+.amount {
+  flex: 1;
+  font-size: 12px;
+  color: #212121;
+  text-align: right;
+}
+
+.table-header .description, .table-header .amount {
+  font-weight: bold;
+}
+
+/* Details */
+.detail {
+  font-size: 12px;
+  color: #212121;
+  margin: 12px 0;
+}
+
+/* Button */
+.button-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.download-button {
+  background-color: #FFB300 !important;
+  color: #212121 !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.download-button i {
+  margin-right: 8px;
+  color: #212121 !important;
+}
+
+.download-button[disabled] {
+  background-color:#212121 !important;
+  color: #9E9E9E !important;
+}
+
+/* Divider */
+mat-divider {
+  margin: 20px 0;
+  background-color: #FFB300 !important;
+}
+
+/* Footer */
+.footer {
+  font-size: 10px;
+  color: var(--text-grey);
+  text-align: center;
+}
+
+/* Loading and error states */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #FAFAFA;
+}
+
+.error-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #FAFAFA;
+}
+
+.error {
+  color: var(--red-medium); /* Fixed to use red-medium for better visibility */
+  font-size: 16px;
+}
+
+/* Override Angular Material spinner */
+mat-spinner circle {
+  stroke: #FFB300 !important;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .page-container {
+    padding: 8px;
+  }
+
+  .header-content h1 {
+    font-size: 18px;
+  }
+
+  .header-content p {
+    font-size: 11px;
+  }
+
+  .section-card h2 {
+    font-size: 13px;
+  }
+
+  .section-content .label {
+    width: 70px;
+    font-size: 11px;
+  }
+
+  .section-content span:not(.label) {
+    font-size: 11px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .description, .amount {
+    font-size: 11px;
+  }
+
+  .download-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .footer {
+    font-size: 9px;
+  }
+}

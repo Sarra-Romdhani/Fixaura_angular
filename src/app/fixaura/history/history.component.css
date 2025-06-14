@@ -1,0 +1,233 @@
+/* History Container */
+.history-container {
+  min-height: 100vh;
+  background-color: var(--card-background); /* Light: #E0E0E0, Dark: #424242 */
+}
+
+/* App Bar */
+.app-bar {
+  padding: 16px;
+  background-color: transparent; /* Remains transparent */
+  border-bottom: 1px solid var(--shadow-grey); /* Light/Dark: rgba(97, 97, 97, 0.3) */
+  display: flex;
+  align-items: center;
+}
+
+/* Back Button */
+.back-button {
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+}
+
+/* Profile Button */
+.profile-button {
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  font-size: 24px;
+  margin-left: 8px;
+}
+
+/* Tabs Container */
+.tabs-container {
+  display: flex;
+  background-color: var(--card-background); /* Light: #E0E0E0, Dark: #424242 */
+  box-shadow: 0 2px 3px var(--shadow-grey); /* Light/Dark: rgba(97, 97, 97, 0.3) */
+}
+
+/* Tab Button */
+.tab-button {
+  flex: 1;
+  padding: 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+/* Active Tab Button */
+.tab-button.active {
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  font-weight: bold;
+  border-bottom: 3px solid var(--accent);
+}
+
+/* Content Container */
+.content-container {
+  padding: 8px 0 24px;
+}
+
+/* Loading Container */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+/* Spinner Border */
+.spinner-border {
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+}
+
+/* Error and Empty Containers */
+.error-container, .empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  height: 50vh;
+}
+
+/* Icons in Error/Empty Containers */
+.error-container i, .empty-container i {
+  font-size: 48px;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+}
+
+/* Headings in Error/Empty Containers */
+.error-container h3, .empty-container h3 {
+  font-size: 18px;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+  margin: 16px 0 8px;
+}
+
+/* Paragraphs in Error/Empty Containers */
+.error-container p, .empty-container p {
+  font-size: 14px;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+}
+
+/* Retry Button */
+.retry-button {
+  margin-top: 24px;
+  padding: 12px 32px;
+  border-radius: 12px;
+  background-color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  color: var(--white-background); /* Light: #FFFFFF, Dark: #000000 (but text should remain readable) */
+}
+
+/* Retry Button Hover */
+.retry-button:hover {
+  background-color: var(--amber-light); /* Light: #FFECB3, Dark: #FFECB3 (using light amber for consistency) */
+}
+
+/* Reservation Card */
+.reservation-card {
+  margin: 8px 16px;
+  padding: 16px;
+  background-color: var(--white-background); /* Light: #FFFFFF, Dark: #000000 */
+  border-radius: 12px;
+  box-shadow: 0 2px 5px var(--shadow-grey); /* Light/Dark: rgba(97, 97, 97, 0.3) */
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Service Name */
+.service-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  letter-spacing: 0.5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Completed Status Badge */
+.status-badge.completed {
+  background-color: var(--green-light); /* Light/Dark: #DCEDC8 */
+  color: var(--green-medium); /* Light/Dark: #4CAF50 */
+}
+
+/* Canceled Status Badge */
+.status-badge.canceled {
+  background-color: var(--red-light); /* Light/Dark: #FFCDD2 */
+  color: var(--red-medium); /* Light/Dark: #F44336 */
+}
+
+/* Client Info */
+.client-info {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+/* Avatar Container */
+.avatar-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  overflow: hidden;
+}
+
+/* Avatar Image */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Client Details */
+.client-details {
+  margin-left: 8px;
+}
+
+/* Client Details Heading */
+.client-details h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  margin: 0;
+}
+
+/* Client Details Paragraph */
+.client-details p {
+  font-size: 12px;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+  margin: 0;
+}
+
+/* Details Row */
+.details-row {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+/* Detail Item */
+.detail-item {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Detail Item Icon */
+.detail-item i {
+  font-size: 20px;
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+}
+
+/* Detail Item Text */
+.detail-item span {
+  font-size: 14px;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  margin-left: 8px;
+}

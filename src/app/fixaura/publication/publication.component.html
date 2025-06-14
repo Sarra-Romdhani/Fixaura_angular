@@ -1,0 +1,305 @@
+<!-- <div class="container min-h-screen p-4 flex flex-col items-center bg-light">
+  <mat-spinner *ngIf="isLoading" color="primary" class="mx-auto my-4"></mat-spinner>
+
+  <div *ngIf="hasError && !isLoading" class="flex flex-col items-center text-center error-message">
+    <i class="bi bi-exclamation-circle text-6xl text-red-600"></i>
+    <p class="text-lg mt-4 text-gray-600">
+      Error loading publications
+    </p>
+    <button mat-raised-button class="mt-4 bg-amber-600" (click)="fetchPublications()">
+      <span class="text-white">Retry</span>
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && publications.length === 0" class="flex flex-col items-center text-center">
+    <p class="text-lg text-gray-600">
+      No publications available
+    </p>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && publications.length > 0" class="publication-container">
+    <div *ngFor="let publication of publications" class="publication-card" [@cardAnimation]>
+      <div *ngIf="isOwner" class="owner-actions">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="bi bi-three-dots-vertical text-amber-600"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openEditDialog(publication)">
+            <i class="bi bi-pencil text-amber-600"></i>
+            <span class="text-gray-900">Edit</span>
+          </button>
+          <button mat-menu-item (click)="showDeleteConfirmation(publication.id!)">
+          z  <i class="bi bi-trash text-red-600"></i>
+            <span class="text-gray-900">Delete</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      <div class="card-inner">
+        <div class="left-column">
+          <div class="image-container">
+            <img *ngIf="publication.imageUrl && !publication.imageUrl.includes('undefined')"
+                 [src]="normalizeImageUrl(publication.imageUrl)"
+                 class="publication-image"
+                 alt="Publication image"
+                 (error)="handleImageError($event)">
+            <div *ngIf="!publication.imageUrl || publication.imageUrl.includes('undefined')"
+                 class="image-placeholder">
+              <i class="bi bi-image text-4xl text-gray-600"></i>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <div class="action-buttons">
+              <button class="action-button" [disabled]="isLiking" (click)="toggleLike(publication.id!)">
+                <i class="bi" [ngClass]="publication.likes.includes(loggedInUserId) ? 'bi-heart-fill text-red-600' : 'bi-heart text-red-600'"></i>
+                <span class="action-count text-gray-600">{{ publication.likes.length }}</span>
+              </button>
+              <button class="action-button" (click)="openCommentDialog(publication)">
+                <i class="bi bi-chat-left-text text-amber-600"></i>
+                <span class="action-count text-gray-600">{{ publication.comments.length }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <h3 class="card-title text-gray-900">
+            {{ publication.title }}
+          </h3>
+
+          <p class="card-description text-gray-600">
+            {{ publication.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button *ngIf="isOwner" class="fab bg-amber-600" (click)="openEditDialog(null)">
+    <i class="bi bi-plus text-white text-2xl"></i>
+  </button>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="container min-h-screen p-4 flex flex-col items-center bg-light">
+  <mat-spinner *ngIf="isLoading" color="primary" class="mx-auto my-4"></mat-spinner>
+
+  <div *ngIf="hasError && !isLoading" class="flex flex-col items-center text-center error-message">
+    <i class="bi bi-exclamation-circle text-6xl text-red-600"></i>
+    <p class="text-lg mt-4 text-gray-600">
+      Error loading publications
+    </p>
+    <button mat-raised-button class="mt-4 bg-amber-600" (click)="fetchPublications()">
+      <span class="text-white">Retry</span>
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && publications.length === 0" class="flex flex-col items-center text-center">
+    <p class="text-lg text-gray-600">
+      No publications available
+    </p>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && publications.length > 0" class="publication-container">
+    <div *ngFor="let publication of publications" class="publication-card" [@cardAnimation] (click)="openDetailsDialog(publication)">
+     
+      <div *ngIf="isOwner" class="owner-actions">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <i class="bi bi-three-dots-vertical text-amber-600"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openEditDialog(publication)">
+            <i class="bi bi-pencil text-amber-600"></i>
+            <span class="text-gray-900">Edit</span>
+          </button>
+          <button mat-menu-item (click)="showDeleteConfirmation(publication.id!)">
+            <i class="bi bi-trash text-red-600"></i>
+            <span class="text-gray-900">Delete</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      <div class="card-inner">
+        <div class="left-column">
+          <div class="image-container">
+            <div *ngIf="publication.imageUrls && publication.imageUrls.length > 0 && normalizeImageUrl(publication.imageUrls[0]) !== '/assets/default-image.png'; else placeholder">
+              <img [src]="normalizeImageUrl(publication.imageUrls[0])" class="publication-image" alt="Publication image" (error)="handleImageError($event)">
+            </div>
+            <ng-template #placeholder>
+              <div class="image-placeholder">
+                <i class="bi bi-image text-4xl text-gray-600"></i>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="card-actions">
+            <div class="action-buttons">
+              <button class="action-button" [disabled]="isLiking" (click)="toggleLike(publication.id!); $event.stopPropagation()">
+                <i class="bi" [ngClass]="publication.likes.includes(loggedInUserId) ? 'bi-heart-fill text-red-600' : 'bi-heart text-red-600'"></i>
+                <span class="action-count text-gray-600">{{ publication.likes.length }}</span>
+              </button>
+              <button class="action-button" (click)="openCommentDialog(publication); $event.stopPropagation()">
+                <i class="bi bi-chat-left-text text-amber-600"></i>
+                <span class="action-count text-gray-600">{{ publication.comments.length }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <h3 class="card-title text-gray-900">
+            {{ publication.title }}
+          </h3>
+          <p class="card-description text-gray-600">
+            {{ publication.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button *ngIf="isOwner" class="fab bg-amber-600" (click)="openEditDialog(null)">
+    <i class="bi bi-plus text-white text-2xl"></i>
+  </button>
+</div> -->
+
+
+
+
+
+
+
+
+<!-- src/app/fixaura/publication/publication.component.html -->
+<div class="container min-h-screen p-4 flex flex-col items-center bg-light">
+  <mat-spinner *ngIf="isLoading" color="primary" class="mx-auto my-4"></mat-spinner>
+
+  <div *ngIf="hasError && !isLoading" class="flex flex-col items-center text-center error-message">
+    <i class="bi bi-exclamation-circle text-6xl text-red-600"></i>
+    <p class="text-lg mt-4 text-gray-600">
+      Error loading publications
+    </p>
+    <button mat-raised-button class="mt-4 bg-amber-600" (click)="fetchPublications()">
+      <span class="text-white">Retry</span>
+    </button>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && publications.length === 0" class="flex flex-col items-center text-center">
+    <p class="text-lg text-gray-600">
+      No publications available
+    </p>
+  </div>
+
+  <div *ngIf="!isLoading && !hasError && publications.length > 0" class="publication-container">
+    <div *ngFor="let publication of publications" class="publication-card" [@cardAnimation] (click)="openDetailsDialog(publication)">
+      <div *ngIf="isOwner" class="owner-actions">
+        <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openEditDialog(publication)">
+  <i class="bi bi-pencil"></i> Edit
+</button>
+          <button mat-menu-item (click)="showDeleteConfirmation(publication.id!)">
+  <i class="bi bi-trash"></i> Delete
+</button>
+        </mat-menu>
+      </div>
+
+      <div class="card-inner">
+        <div class="left-column">
+          <div class="image-container">
+            <div *ngIf="publication.imageUrls && publication.imageUrls.length > 0 && normalizeImageUrl(publication.imageUrls[0]) !== '/assets/default-image.png'; else placeholder">
+              <img [src]="normalizeImageUrl(publication.imageUrls[0])" class="publication-image" alt="Publication image" (error)="handleImageError($event)">
+            </div>
+            <ng-template #placeholder>
+              <div class="image-placeholder">
+                <i class="bi bi-image text-4xl text-gray-600"></i>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="card-actions">
+            <div class="action-buttons">
+              <button class="action-button" [disabled]="isLiking" (click)="toggleLike(publication.id!); $event.stopPropagation()">
+                <i class="bi" [ngClass]="publication.likes.includes(loggedInUserId) ? 'bi-heart-fill text-red-600' : 'bi-heart text-red-600'"></i>
+                <span class="action-count text-gray-600">{{ publication.likes.length }}</span>
+              </button>
+              <button class="action-button" (click)="openCommentDialog(publication); $event.stopPropagation()">
+                <i class="bi bi-chat-left-text text-amber-600"></i>
+                <span class="action-count text-gray-600">{{ publication.comments.length }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <h3 class="card-title text-gray-900">
+            {{ publication.title }}
+          </h3>
+          <p class="card-description text-gray-600">
+            {{ publication.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button *ngIf="isOwner" class="fab bg-amber-600" (click)="openEditDialog(null)">
+    <i class="bi bi-plus text-white text-2xl"></i>
+  </button>
+</div>

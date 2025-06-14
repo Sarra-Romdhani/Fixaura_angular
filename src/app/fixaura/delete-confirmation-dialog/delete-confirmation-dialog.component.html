@@ -1,0 +1,30 @@
+<!-- <div class="dialog-container">
+  <h2 mat-dialog-title class="dialog-title">Confirmer la suppression</h2>
+  <mat-dialog-content class="dialog-content">
+    <div class="confirmation-content">
+      <i class="bi bi-exclamation-triangle confirmation-icon"></i>
+      <p class="confirmation-text">Voulez-vous vraiment supprimer cette publication ?</p>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button class="cancel-button" (click)="dialogRef.close()">Annuler</button>
+    <button mat-raised-button class="delete-button" (click)="confirm.emit()">Supprimer</button>
+  </mat-dialog-actions>
+</div> -->
+
+<!-- src/app/fixaura/delete-confirmation-dialog/delete-confirmation-dialog.component.html -->
+<div class="modal-content" [ngClass]="{'dark-mode': isDarkMode}">
+  <div class="modal-header">
+    <h5 class="modal-title text-danger">Confirmer la suppression</h5>
+  </div>
+  <div class="modal-body text-center">
+    <div class="icon-container">
+      <i class="bi bi-trash3-fill text-danger"></i>
+    </div>
+    <p class="mt-3">Voulez-vous vraiment supprimer cette publication ?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" [ngClass]="isDarkMode ? 'btn-outline-light' : 'btn-outline-secondary'" (click)="onCancel()">Annuler</button>
+    <button class="btn" [ngClass]="isDarkMode ? 'btn-outline-danger' : 'btn-outline-warning'" (click)="onConfirm()">Supprimer</button>
+  </div>
+</div>

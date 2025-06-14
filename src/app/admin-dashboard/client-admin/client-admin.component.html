@@ -1,0 +1,130 @@
+
+<div class="dashboard-container">
+  <mat-toolbar color="primary" class="navbar">
+    <div class="nav-links">
+      <a mat-button routerLink="/admin" routerLinkActive="active">Statistiques Générales</a>
+      <a mat-button routerLink="/clients" routerLinkActive="active">Gérer les Clients</a>
+      <a mat-button routerLink="/prestataires" routerLinkActive="active">Gérer les Prestataires</a>
+    </div>
+    <button mat-raised-button color="warn" class="logout-btn">Déconnexion</button>
+  </mat-toolbar>
+  <header>
+    <h1>Gestion des Clients</h1>
+  </header>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  <div class="charts">
+    <div class="chart-container">
+      <h3>Clients Signalés vs Non Signalés</h3>
+      <canvas id="flaggedClientsChart"></canvas>
+      <p *ngIf="clients.length === 0" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Clients les Plus Actifs</h3>
+      <canvas id="topClientsChart"></canvas>
+      <p *ngIf="reservations.length === 0 || clients.length === 0" class="no-data">Aucune donnée disponible</p>
+    </div>
+  </div>
+  <div class="table-section">
+    <h2>Liste des Clients Non Supprimés</h2>
+    <table mat-table [dataSource]="clients">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let client">{{ client.name || 'Inconnu' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let client">{{ client.email || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let client">{{ client.status || 'actif' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="isFlagged">
+        <th mat-header-cell *matHeaderCellDef>Signalé</th>
+        <td mat-cell *matCellDef="let client">{{ client.isFlagged ? 'Oui' : 'Non' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="flagCount">
+        <th mat-header-cell *matHeaderCellDef>Nombre de Signalements</th>
+        <td mat-cell *matCellDef="let client">{{ client.flagCount || 0 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="flagReason">
+        <th mat-header-cell *matHeaderCellDef>Raison</th>
+        <td mat-cell *matCellDef="let client">{{ client.flagReason || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="deactivationUntil">
+        <th mat-header-cell *matHeaderCellDef>Désactivé Jusqu'à</th>
+        <td mat-cell *matCellDef="let client">{{ client.deactivationUntil ? (client.deactivationUntil | date: 'short') : '-' }}</td>
+      </ng-container>
+     <ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef>Actions</th>
+  <td mat-cell *matCellDef="let client">
+    <div class="action-buttons">
+      <button *ngIf="!client.isFlagged" mat-raised-button color="warn" (click)="onFlagAccount(client._id)">Signaler</button>
+      <button mat-raised-button color="accent" (click)="onDelete(client._id)">Supprimer</button>
+    </div>
+  </td>
+</ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8">{{ errorMessage || 'Aucun client disponible.' }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="table-section">
+    <h2>Liste des Clients Supprimés</h2>
+    <table mat-table [dataSource]="deletedClients">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let client">{{ client.name || 'Inconnu' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let client">{{ client.email || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let client">{{ client.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="deletionReason">
+        <th mat-header-cell *matHeaderCellDef>Raison de Suppression</th>
+        <td mat-cell *matCellDef="let client">{{ client.deletionReason || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="deletedAt">
+        <th mat-header-cell *matHeaderCellDef>Date de Suppression</th>
+        <td mat-cell *matCellDef="let client">{{ client.deletedAt | date: 'short' }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="deletedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: deletedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="5">Aucun client supprimé disponible.</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isFlagging" class="modal">
+    <div class="modal-content">
+      <h3>Signaler un Client</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Raison du signalement</mat-label>
+        <input matInput [(ngModel)]="reason" placeholder="Raison du signalement" required />
+      </mat-form-field>
+      <div class="modal-buttons">
+        <button mat-raised-button color="primary" (click)="onConfirmFlag()">Confirmer</button>
+        <button mat-raised-button color="warn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isDeleting" class="modal">
+    <div class="modal-content">
+      <h3>Supprimer un Client</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Raison de la suppression</mat-label>
+        <input matInput [(ngModel)]="reason" placeholder="Raison de la suppression" required />
+      </mat-form-field>
+      <div class="modal-buttons">
+        <button mat-raised-button color="primary" (click)="onConfirmDelete()">Confirmer</button>
+        <button mat-raised-button color="warn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>

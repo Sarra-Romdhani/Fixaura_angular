@@ -1,0 +1,113 @@
+<mat-toolbar class="app-bar">
+  <button mat-icon-button (click)="goBack()">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+  <span>Facture</span>
+</mat-toolbar>
+
+<div class="page-container">
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+
+  <div class="error-container" *ngIf="errorMessage && !isLoading">
+    <p class="error">{{ errorMessage }}</p>
+  </div>
+
+  <div class="content-container" *ngIf="!isLoading && !errorMessage && facture && reservation && prestataire">
+    <mat-card class="header-card">
+      <div class="header-content">
+        <h1>Facture de Réservation</h1>
+        <p>ID Réservation: {{ reservation.id }}</p>
+        <p>Service: {{ facture.service }}</p>
+        <p>Date: {{ facture.date | date:'shortDate' }}</p>
+        <p>Lieu: {{ reservation.location || 'Non spécifié' }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="section-card">
+      <h2>Client</h2>
+      <div class="section-content">
+        <div class="row">
+          <span class="label">Nom</span>
+          <span>{{ reservation.client.name || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Téléphone</span>
+          <span>{{ reservation.client.phoneNumber || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Email</span>
+          <span>{{ reservation.client.email || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Adresse</span>
+          <span>{{ reservation.client.homeAddress || 'Non spécifié' }}</span>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="section-card">
+      <h2>Prestataire</h2>
+      <div class="section-content">
+        <div class="row">
+          <span class="label">Nom</span>
+          <span>{{ prestataire.name || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Métier</span>
+          <span>{{ prestataire.job || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Téléphone</span>
+          <span>{{ prestataire.phoneNumber || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Email</span>
+          <span>{{ prestataire.email || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Adresse</span>
+          <span>{{ prestataire.businessAddress || 'Non spécifié' }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Note</span>
+          <span>{{ prestataire.rating?.toString() || 'Non spécifié' }}</span>
+        </div>
+      </div>
+    </mat-card>
+
+    <h2 class="section-title">Détails de Paiement</h2>
+    <mat-card class="section-card">
+      <div class="payment-table">
+        <div class="table-header">
+          <span class="description">Description</span>
+          <span class="amount">Montant</span>
+        </div>
+        <div class="table-row">
+          <span class="description">Prix Original</span>
+          <span class="amount">{{ ((facture.price || 0) + (facture.discountAmount || 0)) | number:'1.0-0' }} DT</span>
+        </div>
+        <div class="table-row" *ngIf="facture.discountApplied">
+          <span class="description discount">Remise</span>
+          <span class="amount discount">-{{ facture.discountAmount | number:'1.0-0' }} DT</span>
+        </div>
+        <div class="table-row total">
+          <span class="description">Montant Total</span>
+          <span class="amount">{{ facture.price | number:'1.0-0' }} DT</span>
+        </div>
+      </div>
+    </mat-card>
+
+    <p class="detail">Demande spéciale: {{ reservation.request || 'Aucune' }}</p>
+
+    <div class="button-container">
+      <button mat-raised-button class="download-button" (click)="generateAndDownloadPdf()" [disabled]="isGeneratingPdf">
+        <i class="bi bi-download"></i> Télécharger la Facture
+      </button>
+    </div>
+
+    <mat-divider></mat-divider>
+    <p class="footer">Facture générée le: {{ today | date:'short' }}</p>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<!-- <div class="dialog-container">
+  <div class="dialog-content">
+    <p [ngClass]="{'error-text': data.isError, 'success-text': !data.isError}">
+      {{ data.message }}
+    </p>
+    <p *ngIf="data.reservationId" class="reservation-id">
+      ID de la réservation : {{ data.reservationId }}
+    </p>
+  </div>
+  <div class="dialog-actions">
+    <button mat-button (click)="onOkClick()" class="ok-button">OK</button>
+  </div>
+</div> -->
+
+<div class="dialog-container">
+  <div class="dialog-content">
+    <p [ngClass]="{'error-text': data.isError, 'success-text': !data.isError}">
+      {{ data.message }}
+    </p>
+  </div>
+  <div class="dialog-actions">
+    <button mat-button (click)="onOkClick()" class="ok-button">OK</button>
+  </div>
+</div>

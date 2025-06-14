@@ -1,0 +1,109 @@
+.dialog-container {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.dark-mode .dialog-container {
+  background: #333;
+  color: #fff;
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.dialog-image {
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background: #f0f0f0; /* Fallback background */
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Option 1: Shows entire image, may have borders */
+  /* object-fit: cover; */ /* Option 2: Fills container, may crop image */
+  object-position: center;
+}
+
+.placeholder-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: #666;
+}
+
+.dialog-section {
+  margin-bottom: 20px;
+}
+
+.dialog-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.dialog-section p {
+  margin: 0;
+  color: #555;
+}
+
+.dark-mode .dialog-section p {
+  color: #ddd;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-row i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: #ff9800; /* Light mode: amber */
+}
+
+.dark-mode .info-row i {
+  color: #0288D1; /* Dark mode: blue (accent-blue) */
+}
+
+.info-row span {
+  font-size: 1rem;
+}
+
+.dialog-actions {
+  text-align: right;
+}
+
+.creative-close-button {
+  background: #ff9800; /* Light mode: amber */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.creative-close-button:hover {
+  background: #e68900; /* Light mode: darker amber */
+}
+
+.dark-mode .creative-close-button {
+  background: #0288D1; /* Dark mode: blue (accent-blue) */
+}
+
+.dark-mode .creative-close-button:hover {
+  background: #1976D2; /* Dark mode: darker blue (primary-blue) */
+}

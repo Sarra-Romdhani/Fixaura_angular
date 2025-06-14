@@ -1,0 +1,37 @@
+<div class="flag-dialog">
+  <h2 mat-dialog-title class="dialog-title">
+    <i class="bi bi-flag-fill title-icon"></i> Signaler le Prestataire
+  </h2>
+  <mat-dialog-content class="dialog-content">
+    <form [formGroup]="flagForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Raison du signalement</mat-label>
+        <textarea
+          matInput
+          formControlName="reason"
+          placeholder="Entrez la raison du signalement (minimum 10 caractères)"
+          rows="5"
+          class="reason-textarea"
+        ></textarea>
+        <mat-error *ngIf="flagForm.get('reason')?.hasError('required')">
+          La raison est requise
+        </mat-error>
+        <mat-error *ngIf="flagForm.get('reason')?.hasError('minlength')">
+          La raison doit contenir au moins 10 caractères
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button class="cancel-btn" (click)="cancel()">Annuler</button>
+    <button
+      mat-raised-button
+      color="warn"
+      class="submit-btn"
+      [disabled]="flagForm.invalid"
+      (click)="submitFlag()"
+    >
+      Signaler
+    </button>
+  </mat-dialog-actions>
+</div>

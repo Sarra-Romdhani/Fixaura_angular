@@ -1,0 +1,138 @@
+/* src/app/fixaura/delete-confirmation-dialog/delete-confirmation-dialog.component.scss */
+:host {
+  display: block;
+}
+
+.modal-content {
+  background-color: var(--light-grey, #e5e7eb);
+  border: 3px solid var(--amber-medium, #f59e0b);
+  box-sizing: border-box;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+
+  &.dark-mode {
+    background-color: var(--dark-grey, #374151);
+    border-color: var(--amber-medium, #f59e0b);
+  }
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--no-data-grey, #d1d5db);
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--red-medium, #ef4444);
+    margin: 0;
+  }
+
+  &.dark-mode {
+    border-bottom-color: var(--dark-grey, #4b5563);
+    .modal-title {
+      color: var(--red-medium, #ef4444);
+    }
+  }
+}
+
+.modal-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  .icon-container {
+    .bi-trash3-fill {
+      font-size: 40px;
+      color: var(--red-medium, #ef4444);
+    }
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--text-primary, #111827);
+    margin: 0;
+
+    &.dark-mode {
+      color: var(--text-primary, #f3f4f6);
+    }
+  }
+
+  &.dark-mode {
+    color: var(--text-primary, #f3f4f6);
+  }
+}
+
+.modal-footer {
+  border-top: 1px solid var(--no-data-grey, #d1d5db);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  &.dark-mode {
+    border-top-color: var(--dark-grey, #4b5563);
+  }
+
+  .btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    text-align: center;
+  }
+
+  .btn-outline-secondary {
+    background-color: var(--no-data-grey, #d1d5db);
+    color: #000000;
+    border: none;
+
+    &:hover {
+      background-color: #9ca3af;
+    }
+  }
+
+  .btn-outline-light {
+    background-color: var(--dark-grey, #4b5563);
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background-color: #6b7280;
+    }
+  }
+
+  .btn-outline-warning {
+    background-color: #822121;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background-color: #6b1b1b;
+    }
+  }
+
+  .btn-outline-danger {
+    background-color: #822121;
+    color: #ffffff;
+    border: none;
+
+    &:hover {
+      background-color: #6b1b1b;
+    }
+  }
+}
+
+/* Override Material dialog padding */
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}

@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Light Theme (default) */
+:root, .light-theme {
+  --primary: #F5A623; /* Orange principal */
+  --secondary: #E8AB62; /* Orange secondaire */
+  --background-grey: #808080; /* Colors.grey */
+  --card-background: #E0E0E0; /* grey[200] */
+  --card-background-light: #F5F5F5; /* grey[100] */
+  --text-primary: #000000;
+  --text-secondary: #808080; /* Colors.grey */
+  --accent: #FFC107; /* Colors.amber */
+  --error: #FF0000;
+  --white-background: #FFFFFF;
+  --light-orange: hwb(36 68% 13% / 0.273); /* orange.shade50 */
+  --shadow-grey: rgba(97, 97, 97, 0.3); /* grey with opacity 0.3 */
+  --dark-orange: #E65100; /* orange.shade800 */
+  --confirmed-orange: #F57C00; /* orange.shade600 */
+  --pending-yellow: #FBC02D; /* yellow.shade600 */
+  --no-data-grey: #B0BEC5; /* grey.shade300 */
+  --dark-grey: #424242; /* grey.shade800 */
+  --light-grey: #FAFAFA; /* grey[50] */
+  --medium-grey: #B0BEC5; /* grey[400] */
+  --text-grey: #757575; /* grey[600] */
+  --amber-light: #FFECB3; /* amber[100] */
+  --amber-dark: #FF8F00; /* amber[800] */
+  --amber-medium: #FFA000; /* amber[700] */
+  --green-light: #DCEDC8; /* green[100] */
+  --green-medium: #4CAF50; /* green[500] */
+  --red-light: #FFCDD2; /* red[100] */
+  --red-medium: #F44336; /* red[500] */
+}
+
+/* Dark Theme */
+.dark-theme {
+  /* --primary: #607D8B;  */
+    --primary: #0288D1; /* blue[800] */
+  --secondary: #40C4FF; /* Replace orange with blue */
+  --background-grey: #808080;
+  --card-background: #424242; /* Dark grey for cards */
+  --card-background-light: #1E1E1E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #808080;
+  --accent: #40C4FF; /* Blue for dark theme */
+  --error: #FF0000;
+  --white-background: #000000; /* Black background */
+  --light-orange: #b3e5fccc; /* Replace orange.shade50 with blue.shade50 */
+  --shadow-grey: rgba(97, 97, 97, 0.3);
+  --dark-orange: #0288D1; /* Replace orange.shade800 with blue[800] */
+  --confirmed-orange: #1976D2; /* Replace orange.shade600 with blue[700] */
+  --pending-yellow: #40C4FF; /* Replace yellow.shade600 with blue */
+  --no-data-grey: #B0BEC5;
+  --dark-grey: #424242;
+  --light-grey: #FAFAFA;
+  --medium-grey: #B0BEC5;
+  --text-grey: #757575;
+  --amber-light: #B3E5FC; /* Replace amber[100] with blue.shade50 */
+  --amber-dark: #0288D1; /* Replace amber[800] with blue[800] */
+  --amber-medium: #40C4FF; /* Blue for dark theme */
+  --green-light: #DCEDC8;
+  --green-medium: #4CAF50;
+  --red-light: #FFCDD2;
+  --red-medium: #F44336;
+  --primary-blue: #1976D2; /* blue[700] */
+  --accent-blue: #0288D1; /* blue[800] */
+  --light-blue: lab(94.71% -2.83 -6.99); /* blue.shade50 */
+  --card-header-blue: #1565C0; /* blue[800] */
+}
+
+/* Global styles */
+body {
+  background-color: var(--white-background); /* #FFFFFF in light, #000000 in dark */
+  color: var(--text-primary);
+  transition: all 0.3s ease; /* Smooth theme transitions */
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--white-background);
+}
+
+[data-theme="dark"] .page {
+  background-color: var(--white-background); /* Ensure black background in dark mode */
+}

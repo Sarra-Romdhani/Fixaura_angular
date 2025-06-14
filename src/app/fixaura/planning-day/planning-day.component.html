@@ -1,0 +1,25 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<div class="app-bar">
+  <button mat-icon-button (click)="goBack()" class="back-button">
+    <span class="arrow">←</span>
+  </button>
+  <h1>Réservations confirmées du {{ selectedDay | date:'dd MMMM yyyy' }}</h1>
+</div>
+<div class="container">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div *ngIf="!isLoading && reservations.length === 0" class="no-reservations">
+    <i class="bi bi-info-circle me-3"></i> Aucune réservation confirmée pour ce jour
+  </div>
+  <mat-card *ngFor="let reservation of reservations" class="reservation-card">
+    <mat-card-content>
+      <p><i class="bi bi-scissors me-3"></i><strong>Service:</strong> {{ reservation.service }}</p>
+      <p><i class="bi bi-person me-3"></i><strong>Client:</strong> {{ reservation.client?.name }}</p>
+      <p><i class="bi bi-clock me-3"></i><strong>Heure:</strong> {{ reservation.date | date:'HH:mm' }}</p>
+      <p><i class="bi bi-geo-alt me-3"></i><strong>Lieu:</strong> {{ reservation.location }}</p>
+      <p><i class="bi bi-check-circle me-3"></i><strong>Statut:</strong> Confirmé</p>
+      <p *ngIf="reservation.price"><i class="bi bi-currency-dollar me-3"></i><strong>Prix:</strong> {{ reservation.price }} TND</p>
+      <p *ngIf="reservation.request"><i class="bi bi-chat-text me-3"></i><strong>Demande:</strong> {{ reservation.request }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

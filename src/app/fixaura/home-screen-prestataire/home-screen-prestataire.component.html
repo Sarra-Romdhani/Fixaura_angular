@@ -1,0 +1,166 @@
+<!-- home-screen-prestataire.component.html -->
+<div class="home-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>Accueil</h1>
+      <button class="btn notification-btn" (click)="navigateToNotifications()">
+        <i class="bi bi-bell-fill" [ngClass]="{'badge': pendingReservationsCount > 0}" [attr.data-badge]="pendingReservationsCount"></i>
+      </button>
+    </div>
+    <div class="search-field">
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input type="text" class="form-control" placeholder="Rechercher..." [formControl]="searchControl">
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Statistics Charts -->
+    <mat-card class="stats-card" *ngIf="statistics">
+      <h3>Weekly Booking Insights</h3>
+      <div class="charts-container">
+        <!-- Pie Chart -->
+        <apx-chart
+          [chart]="pieChartOptions.chart"
+          [series]="pieChartOptions.series"
+          [labels]="pieChartOptions.labels"
+          [colors]="pieChartOptions.colors"
+          [dataLabels]="pieChartOptions.dataLabels"
+          [legend]="pieChartOptions.legend"
+          [stroke]="pieChartOptions.stroke"
+        ></apx-chart>
+        <!-- Bar Chart -->
+        <apx-chart
+          [chart]="barChartOptions.chart"
+          [series]="barChartOptions.series"
+          [xaxis]="barChartOptions.xaxis"
+          [yaxis]="barChartOptions.yaxis"
+          [colors]="barChartOptions.colors"
+          [plotOptions]="barChartOptions.plotOptions"
+          [grid]="barChartOptions.grid"
+          [dataLabels]="barChartOptions.dataLabels"
+        ></apx-chart>
+        <!-- Donut Chart -->
+        <apx-chart
+          [chart]="donutChartOptions.chart"
+          [series]="donutChartOptions.series"
+          [labels]="donutChartOptions.labels"
+          [colors]="pieChartOptions.colors"
+          [dataLabels]="pieChartOptions.dataLabels"
+          [legend]="pieChartOptions.legend"
+          [stroke]="pieChartOptions.stroke"
+          [plotOptions]="pieChartOptions.plotOptions"
+        ></apx-chart>
+        <!-- Line Chart -->
+        <apx-chart
+          [chart]="lineChartOptions.chart"
+          [series]="lineChartOptions.series"
+          [xaxis]="lineChartOptions.xaxis"
+          [yaxis]="lineChartOptions.yaxis"
+          [colors]="lineChartOptions.colors"
+          [stroke]="lineChartOptions.stroke"
+          [grid]="lineChartOptions.grid"
+          [dataLabels]="lineChartOptions.dataLabels"
+          [tooltip]="lineChartOptions.tooltip"
+        ></apx-chart>
+      </div>
+      <div class="legend">
+        <span class="legend-item">
+          <span class="dot" [style.backgroundColor]="statistics?.confirmed ? 'var(--confirmed-orange)' : 'var(--no-data-grey)'"></span>
+          Confirmed: {{ (statistics?.confirmed || 0) }}
+        </span>
+        <span class="legend-item">
+          <span class="dot" [style.backgroundColor]="statistics?.pending ? 'var(--pending-yellow)' : 'var(--no-data-grey)'"></span>
+          Pending: {{ (statistics?.pending || 0) }}
+        </span>
+      </div>
+    </mat-card>
+
+    <!-- Chatbot Ad Card -->
+    <mat-card class="chatbot-card" (click)="navigateToChatbot()">
+      <div class="chatbot-content">
+        <i class="bi bi-chat-left"></i>
+        <div class="chatbot-text">
+          <h3>Discutez avec notre Chatbot !</h3>
+          <p>Obtenez des conseils instantanés et personnalisés pour vos services.</p>
+        </div>
+        <i class="bi bi-chevron-right"></i>
+      </div>
+    </mat-card>
+
+    <!-- Professionals List Header -->
+    <h2 class="list-header">Autres professionnels</h2>
+
+    <!-- Professionals List -->
+    <div class="professionals-list" [style.height.px]="filteredPrestataires.length ? 400 : 200">
+      <ng-container *ngIf="isLoading || isSearching; else content">
+        <mat-spinner [diameter]="50"></mat-spinner>
+      </ng-container>
+      <ng-template #content>
+        <ng-container *ngIf="filteredPrestataires.length; else emptyState">
+          <mat-card
+            class="professional-card"
+            *ngFor="let prestataire of filteredPrestataires"
+            (click)="prestataire.id ? navigateToProfile(prestataire.id) : null"
+          >
+            <div class="card-content">
+              <img
+                *ngIf="hasValidImage(prestataire)"
+                [src]="getImageUrl(prestataire.image)"
+                alt="Profile"
+                class="profile-image"
+                (error)="onImageError($event, prestataire.id)"
+              >
+              <i *ngIf="!hasValidImage(prestataire)" class="bi bi-person placeholder-icon"></i>
+              <div class="profile-info">
+                <h3>{{ prestataire.name || 'Nom inconnu' }}</h3>
+                <p>{{ prestataire.job || 'Profession non spécifiée' }}</p>
+                <div class="rating">
+                  <i class="bi bi-star-fill" *ngFor="let star of [1,2,3,4,5]"
+                    [ngClass]="{'filled': star <= getFilledStars(prestataire.rating)}"
+                  ></i>
+                  <span>{{ (prestataire.rating || 0).toFixed(1) }}</span>
+                </div>
+              </div>
+            
+            </div>
+          </mat-card>
+        </ng-container>
+        <ng-template #emptyState>
+          <div class="empty-state">
+            <i class="bi bi-search"></i>
+            <p>{{ searchControl.value ? 'Aucun résultat pour "' + searchControl.value + '"' : 'Aucun autre professionnel disponible' }}</p>
+            <button *ngIf="searchControl.value" class="btn btn-warning" (click)="searchControl.setValue('')">
+              Réinitialiser la recherche
+            </button>
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+
+    <!-- Navbar Component -->
+    <app-navbar
+      [currentIndex]="currentIndex"
+      [unreadMessagesCount]="unreadMessagesCount"
+      [userId]="userId"
+      [loggedId]="loggedId"
+    ></app-navbar>
+
+    <!-- Message Notification SnackBar Template -->
+    <ng-template #messageNotification let-data>
+      <div class="notification-content">
+        <img
+          [src]="getImageUrl(data.senderImage)"
+          alt="Sender"
+          class="sender-image"
+          *ngIf="data.senderImage"
+          (error)="onNotificationImageError($event)"
+        >
+        <i *ngIf="!data.senderImage" class="bi bi-person"></i>
+        <span>Nouveau message de {{ data.senderName }}</span>
+      </div>
+    </ng-template>
+</div>

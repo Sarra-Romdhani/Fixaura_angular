@@ -1,0 +1,86 @@
+<!-- <div class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-end p-4 z-50" (click)="closePopup()">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-64 max-h-[80vh] overflow-y-auto" (click)="$event.stopPropagation()">
+    <div class="flex justify-end p-2">
+      <button class="text-gray-600 dark:text-gray-300" (click)="closePopup()">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="p-4">
+      <div class="space-y-2">
+        <a [routerLink]="['/profile', data.userId]" (click)="closePopup()" class="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          <span class="text-sm">Edit profile</span>
+        </a>
+        <a [routerLink]="['/history', data.userId]" (click)="closePopup()" class="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="text-sm">History</span>
+        </a>
+        <a [routerLink]="['/factures', data.userId]" (click)="closePopup()" class="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <span class="text-sm">Factures</span>
+        </a>
+        <a [routerLink]="['/predictions', data.userId]" (click)="closePopup()" class="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2M9 19"/>
+          </svg>
+          <span class="text-sm">Predictions</span>
+        </a>
+        <div class="flex items-center justify-between p-2">
+          <div class="flex items-center space-x-2 text-gray-800 dark:text-gray-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+            <span class="text-sm">Night mode</span>
+          </div>
+          <mat-slide-toggle [checked]="isDarkMode" (change)="toggleTheme($event.checked)" class="scale-75"></mat-slide-toggle>
+        </div>
+        <div class="pt-2">
+          <div class="text-sm font-semibold text-gray-800 dark:text-gray-200 px-2">Languages</div>
+          <div class="space-y-1">
+            <div class="flex items-center justify-between p-2">
+              <div class="flex items-center space-x-2 text-gray-800 dark:text-gray-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M3 21h18M12 3v18"/>
+                </svg>
+                <span class="text-sm">French</span>
+              </div>
+              <mat-slide-toggle [checked]="isFrenchSelected" (change)="toggleLanguage('French', $event.checked)" class="scale-75"></mat-slide-toggle>
+            </div>
+            <div class="flex items-center justify-between p-2">
+              <div class="flex items-center space-x-2 text-gray-800 dark:text-gray-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M3 21h18M12 3v18"/>
+                </svg>
+                <span class="text-sm">English</span>
+              </div>
+              <mat-slide-toggle [checked]="isEnglishSelected" (change)="toggleLanguage('English', $event.checked)" class="scale-75"></mat-slide-toggle>
+            </div>
+            <div class="flex items-center justify-between p-2">
+              <div class="flex items-center space-x-2 text-gray-800 dark:text-gray-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M3 21h18M12 3v18"/>
+                </svg>
+                <span class="text-sm">Arabic</span>
+              </div>
+              <mat-slide-toggle [checked]="isArabicSelected" (change)="toggleLanguage('Arabic', $event.checked)" class="scale-75"></mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+        <a [routerLink]="['/login']" (click)="signOut()" class="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h3a3 3 0 013 3v1"/>
+          </svg>
+          <span class="text-sm">Sign out</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->

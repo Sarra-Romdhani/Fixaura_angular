@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Rate the Reservation</h2>
+<mat-dialog-content>
+  <div class="stars">
+    <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'selected': star <= rating}" (click)="rating = star">
+      {{ star <= rating ? 'star' : 'star_border' }}
+    </mat-icon>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="rating === 0">Submit</button>
+  <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

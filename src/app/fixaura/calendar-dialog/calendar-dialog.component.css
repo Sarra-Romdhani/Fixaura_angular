@@ -1,0 +1,126 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  max-width: 360px;
+  background-color: #ffffff; /* White in both modes */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .dialog-container {
+  background-color: #ffffff; /* Explicitly white in dark mode */
+}
+
+.dialog-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: var(--text-primary); /* #212121 in light mode */
+}
+
+.dark-mode .dialog-title {
+  color: var(--text-primary-dark); /* #000000 in dark mode for readability */
+}
+
+.spinner {
+  margin: 24px auto;
+}
+
+.error {
+  color: #f44336; /* Red-500, unchanged */
+  text-align: center;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.error button {
+  margin-top: 8px;
+}
+
+.calendar-container {
+  width: 100%;
+  border: 1px solid #e0e0e0; /* Unchanged grey border */
+  border-radius: 4px;
+  overflow: visible;
+}
+
+mat-calendar {
+  width: 100%;
+  font-size: 14px;
+}
+
+/* Style only the text color for reserved dates */
+::ng-deep .mat-calendar-body-cell.reserved-date .mat-calendar-body-cell-content {
+  color: #f44336 !important; /* Red-500, unchanged */
+  background-color: transparent !important;
+  font-weight: 500 !important;
+}
+
+/* Style only the text color for available dates */
+::ng-deep .mat-calendar-body-cell.available-date .mat-calendar-body-cell-content {
+  color: #4caf50 !important; /* Green-500, unchanged */
+  background-color: transparent !important;
+  font-weight: 500 !important;
+}
+
+/* Style for disabled dates */
+::ng-deep .mat-calendar-body-cell.disabled-date .mat-calendar-body-cell-content {
+  color: #bdbdbd !important; /* Gray-400, unchanged */
+  background-color: transparent !important;
+  cursor: not-allowed !important;
+}
+
+/* Ensure cell content dimensions are consistent */
+::ng-deep .mat-calendar-body-cell-content {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for selected date */
+::ng-deep .mat-calendar-body-selected .mat-calendar-body-cell-content {
+  border: 2px solid var(--accent) !important; /* #ff9800 in light mode */
+  box-sizing: border-box;
+  background-color: transparent !important;
+  color: inherit !important; /* Inherit text color from reserved/available */
+}
+
+.dark-mode ::ng-deep .mat-calendar-body-selected .mat-calendar-body-cell-content {
+  border: 2px solid var(--accent-blue) !important; /* #0288d1 in dark mode */
+}
+
+/* Style for focused date */
+::ng-deep .mat-calendar-body-cell:focus .mat-calendar-body-cell-content {
+  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.3) !important; /* Amber-500 with opacity in light mode */
+  background-color: transparent !important;
+}
+
+.dark-mode ::ng-deep .mat-calendar-body-cell:focus .mat-calendar-body-cell-content {
+  box-shadow: 0 0 0 2px rgba(2, 136, 209, 0.3) !important; /* Blue with opacity in dark mode */
+  background-color: transparent !important;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.actions button {
+  min-width: 80px;
+  font-size: 14px;
+  background-color: var(--accent); /* #ff9800 in light mode */
+  color: var(--text-primary); /* #212121 in light mode */
+}
+
+.dark-mode .actions button {
+  background-color: var(--accent-blue); /* #0288d1 in dark mode */
+  color: var(--text-primary-dark); /* #000000 in dark mode */
+}

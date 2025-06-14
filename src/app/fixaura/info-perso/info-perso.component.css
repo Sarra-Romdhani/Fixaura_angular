@@ -1,0 +1,187 @@
+/* Container styles */
+.container {
+  background-color: var(--card-background-light); /* Light: #F5F5F5, Dark: #1E1E1E */
+  min-height: 100vh;
+  padding: 16px;
+  width: 100%;
+}
+
+:host-context(.dark-theme) mat-label {
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+}
+
+
+
+
+:host-context(.dark-theme) mat-form-field  input {
+  color: #FFFFFF !important; /* White text in dark mode for editable inputs */
+}
+
+/* Section title styles */
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.section-title h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  letter-spacing: 1.1px;
+}
+
+/* Form field styles */
+mat-form-field {
+  width: 95%; /* Shortened inputs with space on sides */
+  margin-bottom: 16px;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+mat-form-field .mat-form-field-outline {
+  border: 1px solid var(--text-grey); /* Light/Dark: #757575 */
+  border-radius: 5px; /* border-radius */
+}
+
+
+/* Prefix icon styles */
+.prefix-icon {
+  position: absolute;
+  left: 4px; /* More to the left */
+  top:50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  z-index: 2;
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+  pointer-events: none;
+}
+
+/* Button styles */
+button[color="primary"] {
+  background-color: var(--primary); /* Light: #F5A623, Dark: #607D8B */
+  color: var(--white-background); /* Light: #FFFFFF, Dark: #000000 */
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 80px;
+  display: inline-block;
+}
+
+/* Override button text color in dark mode */
+.dark-theme button[color="primary"] {
+  color: #FFFFFF; /* White text in dark mode */
+}
+
+button[disabled] {
+  background-color: var(--medium-grey); /* Light/Dark: #B0BEC5 */
+  cursor: not-allowed;
+}
+
+/* Snackbar styles */
+:host ::ng-deep .success-snackbar {
+  background-color: var(--green-medium); /* Light/Dark: #4CAF50 */
+  color: var(--white-background); /* Light: #FFFFFF, Dark: #000000 */
+}
+
+/* Override success snackbar text color in dark mode */
+.dark-theme :host ::ng-deep .success-snackbar {
+  color: #FFFFFF; /* White text in dark mode */
+}
+
+:host ::ng-deep .error-snackbar {
+  background-color: var(--red-medium); /* Light/Dark: #F44336 */
+  color: var(--white-background); /* Light: #FFFFFF, Dark: #000000 */
+}
+
+/* Override error snackbar text color in dark mode */
+.dark-theme :host ::ng-deep .error-snackbar {
+  color: #FFFFFF; /* White text in dark mode */
+}
+
+/* Profile image container */
+.relative.mb-6 {
+  position: relative;
+  margin: 24px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.w-32.h-32 {
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.bg-gray-200 {
+  background-color: var(--card-background); /* Light: #E0E0E0, Dark: #424242 */
+}
+
+.flex.items-center.justify-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-5xl {
+  font-size: 48px;
+}
+
+.text-gray-500 {
+  color: var(--text-grey); /* Light/Dark: #757575 */
+}
+
+/* Form submit button container */
+.mt-8 {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* Bootstrap icon adjustments */
+.bi {
+  font-size: 24px;
+}
+
+.section-title .bi {
+  margin-right: 12px;
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+}
+
+/* Icon color for inputs and titles */
+.text-blue-600 {
+  color: var(--accent); /* Light: #FFC107, Dark: #40C4FF */
+}
+
+/* Hide default file input text */
+input[type="file"]::-webkit-file-upload-button,
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+input[type="file"] {
+  color: transparent;
+}
+
+/* Padding in input fields to avoid overlap with icon */
+mat-form-field input {
+  padding-left: 30px !important;
+}
+
+/* Ensure image fills the circle completely */
+img.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fully fills the circle */
+  border-radius: 50%;
+}

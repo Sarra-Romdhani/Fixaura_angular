@@ -1,0 +1,194 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background-color: #ffffff; /* White in both modes */
+  border-radius: 8px;
+}
+
+
+ h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--amber-dark); 
+} 
+
+
+.image-picker {
+  display: flex;
+  justify-content: center;
+}
+
+.image-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  background-color: var(--card-background); /* #e0e0e0 in light mode */
+  border: 2px solid var(--accent) !important; /* #ff9800 in light mode */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.dark-mode .image-preview {
+  background-color: var(--dark-grey); /* #424242 in dark mode */
+  border: 2px solid var(--accent-blue) !important; /* #0288d1 in dark mode */
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-preview i {
+  font-size: 40px;
+  color: var(--accent); /* #ff9800 in light mode */
+}
+
+.dark-mode .image-preview i {
+  color: var(--accent-blue); /* #0288d1 in dark mode */
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field.full-width {
+  width: 100%;
+}
+
+mat-form-field.half-width {
+  width: calc(50% - 8px);
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+mat-form-field i {
+  font-size: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  color: var(--accent); /* #ff9800 in light mode */
+}
+
+.dark-mode mat-form-field i {
+  color: var(--accent-blue); /* #0288d1 in dark mode */
+}
+
+/* Borders for mat-form-field */
+mat-form-field .mat-form-field-outline {
+  border: 2px solid var(--accent) !important; /* #ff9800 in light mode */
+  border-radius: 4px;
+}
+
+.dark-mode mat-form-field .mat-form-field-outline {
+  border: 2px solid var(--accent-blue) !important; /* #0288d1 in dark mode */
+}
+
+/* Remove default outline segments for a consistent border */
+mat-form-field .mat-form-field-outline-start,
+mat-form-field .mat-form-field-outline-end,
+mat-form-field .mat-form-field-outline-gap {
+  border: none !important;
+}
+
+/* Remove any direct input borders and border-radius */
+mat-form-field input,
+mat-form-field textarea {
+  border: none !important;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.input-text {
+  color: var(--text-primary); /* #212121 in light mode */
+}
+
+.dark-mode .input-text {
+  color: var(--text-primary-dark); /* #000000 in dark mode */
+}
+
+/* Adjust padding for the input to align within the bordered mat-form-field */
+mat-form-field .mat-form-field-infix {
+  padding: 8px !important;
+}
+
+/* Adjust label positioning */
+mat-form-field .mat-form-field-label {
+  top: 1.5em;
+  margin-left: 8px;
+  background-color: transparent !important;
+  color: var(--text-grey); /* #757575 in both modes */
+}
+
+mat-form-field.mat-focused .mat-form-field-label,
+mat-form-field.mat-form-field-should-float .mat-form-field-label {
+  top: -0.5em;
+  font-size: 12px;
+  margin-left: 0;
+  background-color: #ffffff; /* White in both modes */
+  padding: 0 4px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.cancel-button {
+  background-color: var(--dark-grey) !important; /* #e0e0e0 in light mode */
+  color: var(--light-grey) !important; /* #424242 in light mode */
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.dark-mode .cancel-button {
+  background-color: var(--dark-grey) !important; /* #424242 in dark mode */
+  color: var(--text-primary-dark) !important; /* #000000 in dark mode */
+}
+
+.cancel-button:hover {
+  background-color: var(--no-data-grey) !important; /* #b0bec5 in both modes */
+}
+
+.save-button {
+  background-color: var(--accent) !important; /* #ff9800 in light mode */
+  color: var(--text-primary) !important; /* #212121 in light mode */
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.dark-mode .save-button {
+  background-color: var(--accent-blue) !important; /* #0288d1 in dark mode */
+  color: var(--text-primary-dark) !important; /* #000000 in dark mode */
+}
+
+.save-button:hover {
+  background-color: var(--amber-medium) !important; /* #ffa000 in light mode */
+}
+
+.dark-mode .save-button:hover {
+  background-color: var(--primary-blue) !important; /* #1976d2 in dark mode */
+}
+
+.save-button:disabled {
+  background-color: var(--card-background) !important; /* #e0e0e0 in light mode */
+  color: var(--medium-grey) !important; /* #b0bec5 in light mode */
+  cursor: not-allowed;
+}
+
+.dark-mode .save-button:disabled {
+  background-color: var(--dark-grey) !important; /* #424242 in dark mode */
+  color: var(--text-grey) !important; /* #757575 in dark mode */
+}

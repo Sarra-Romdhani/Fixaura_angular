@@ -1,0 +1,37 @@
+<!-- <div class="dialog-container" [class.dark-mode]="isDarkMode"> -->
+  <div class="dialog-container" >
+  <h2>Add New Service</h2>
+  <div class="image-picker">
+    <input type="file" accept="image/*" (change)="onFileChange($event)" id="imageInput" hidden>
+    <label for="imageInput" class="image-preview">
+      <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview">
+      <i *ngIf="!previewUrl" class="bi bi-camera"></i>
+    </label>
+  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="service.title" class="input-text">
+    <i matPrefix class="bi bi-fonts"></i>
+  </mat-form-field>
+  <div class="form-row">
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Duration (min)</mat-label>
+      <input matInput type="number" [(ngModel)]="service.estimatedDuration" class="input-text">
+      <i matPrefix class="bi bi-clock"></i>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="half-width">
+      <mat-label>Price (TND)</mat-label>
+      <input matInput type="number" [(ngModel)]="service.price" class="input-text">
+      <i matPrefix class="bi bi-currency-dollar"></i>
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <input matInput [(ngModel)]="service.description" class="input-text">
+    <i matPrefix class="bi bi-text-paragraph"></i>
+  </mat-form-field>
+  <div class="button-row">
+    <button mat-raised-button class="cancel-button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button class="save-button" (click)="save()">Save</button>
+  </div>
+</div>

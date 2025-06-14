@@ -1,0 +1,60 @@
+<div class="chatbot-container">
+  <mat-toolbar color="primary" class="app-bar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <i class="bi bi-list"></i>
+    </button>
+    <span>{{ getAppTitle() }}</span>
+    <span class="spacer"></span>
+    <mat-form-field appearance="fill" class="language-dropdown">
+      <mat-select [(ngModel)]="language">
+        <mat-option value="fr"><i class="bi bi-flag-fill flag-fr"></i> Français</mat-option>
+        <mat-option value="en"><i class="bi bi-flag-fill flag-gb"></i> English</mat-option>
+        <mat-option value="ar"><i class="bi bi-flag-fill flag-sa"></i> العربية</mat-option>
+        <mat-option value="tn"><i class="bi bi-flag-fill flag-tn"></i> Tunisien</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" class="sidenav">
+      <div class="sidenav-header">
+        <h2>Your Chats</h2>
+        <button mat-raised-button color="accent" (click)="startNewDiscussion()">New Chat</button>
+      </div>
+      <mat-list>
+        <div *ngIf="conversations.length === 0" class="no-history">
+          No conversation history available.
+        </div>
+        <mat-list-item *ngFor="let conversation of conversations; let i = index" class="conversation-item animate__animated animate__fadeInLeft" [ngClass]="{'animate__delay-{{i * 100}}ms': true}" (click)="loadConversation(conversation); sidenav.close()">
+          <i class="bi bi-chat-left-text"></i>
+          <span matLine>{{ formatLastMessage(conversation) }}</span>
+          <i *ngIf="conversation.lastLanguage && languageFlags[conversation.lastLanguage]" [ngClass]="languageFlags[conversation.lastLanguage]"></i>
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="message-list">
+        <div *ngIf="messages.length === 0" class="no-messages">
+          No messages to display. Start a new conversation or select one from the history.
+        </div>
+        <div *ngFor="let msg of messages; let i = index" class="message animate__animated animate__fadeInRight" [ngClass]="{'user': msg.sender === 'user', 'bot': msg.sender === 'bot', 'animate__delay-{{i * 100}}ms': true}">
+          <div class="message-bubble" [ngClass]="{'user-bubble': msg.sender === 'user', 'bot-bubble': msg.sender === 'bot'}" [style.direction]="isRTL(msg.text) ? 'rtl' : 'ltr'">
+            {{ msg.text }}
+          </div>
+        </div>
+      </div>
+      <div class="loading-indicator" *ngIf="isLoading">
+        <mat-spinner diameter="30"></mat-spinner>
+      </div>
+      <div class="message-input fixed-bottom">
+        <mat-form-field appearance="fill" class="input-field">
+          <input matInput [(ngModel)]="messageInput" [placeholder]="getHintText()" (keyup.enter)="sendMessage()">
+        </mat-form-field>
+        <button mat-fab color="accent" (click)="sendMessage()">
+          <i class="bi bi-send"></i>
+        </button>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

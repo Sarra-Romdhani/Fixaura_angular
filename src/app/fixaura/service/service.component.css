@@ -1,0 +1,422 @@
+/* Global styles */
+body {
+  background-color: var(--white-background); /* #FFFFFF in light, #000000 in dark */
+  color: var(--text-primary);
+  transition: all 0.3s ease; /* Smooth theme transitions */
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--white-background);
+}
+
+.container {
+  padding: 16px;
+  position: relative;
+  min-height: 100%;
+  background-color: var(--card-background-light); /* #F5F5F5 for light mode */
+  display: flex;
+  flex-direction: column;
+}
+
+.container.dark-mode {
+  background-color: var(--white-background); /* #000000 for dark mode */
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading .spinner-border {
+  color: var(--accent); /* #FFC107 for light mode */
+}
+
+.dark-mode .loading .spinner-border {
+  color: var(--accent-blue); /* #0288D1 for dark mode */
+}
+
+/* Override Bootstrap text classes */
+.text-warning {
+  color: var(--accent) !important; /* #FFC107 for light mode */
+}
+
+.dark-mode .text-warning {
+  color: var(--accent-blue) !important; /* #0288D1 for dark mode */
+}
+
+.text-primary {
+  color: var(--primary) !important; /* #F5A623 for light mode */
+}
+
+.dark-mode .text-primary {
+  color: var(--primary-blue) !important; /* #1976D2 for dark mode */
+}
+
+.no-services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.no-services p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--text-grey); /* #757575 for light mode */
+}
+
+.dark-mode .no-services p {
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.refresh-button {
+  font-size: 14px;
+  padding: 8px 16px;
+  background-color: var(--accent); /* #FFC107 for light mode */
+  color: var(--text-primary); /* #000000 (white in dark mode) */
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .refresh-button {
+  background-color: var(--accent-blue); /* #0288D1 for dark mode */
+  color: var(--text-primary); /* #FFFFFF */
+}
+
+/* Override Bootstrap button classes */
+.btn-warning {
+  background-color: var(--accent) !important; /* #FFC107 for light mode */
+  border-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .btn-warning {
+  background-color: var(--accent-blue) !important; /* #0288D1 for dark mode */
+  border-color: var(--accent-blue) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary) !important; /* #F5A623 for light mode */
+  border-color: var(--primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.dark-mode .btn-primary {
+  background-color: var(--primary-blue) !important; /* #1976D2 for dark mode */
+  border-color: var(--primary-blue) !important;
+  color: var(--text-primary) !important;
+}
+
+.refresh-button:hover {
+  background-color: var(--dark-orange); /* #E65100 for light mode hover */
+}
+
+.dark-mode .refresh-button:hover {
+  background-color: var(--primary-blue); /* #1976D2 for dark mode hover */
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.service-card {
+  background-color: var(--white-background); /* #FFFFFF for light mode */
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .service-card {
+  background-color: var(--card-background); /* #424242 for dark mode */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card-content {
+  display: flex;
+  gap: 16px;
+}
+
+.image-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--card-background); /* #E0E0E0 for light mode */
+}
+
+.dark-mode .image-container {
+  background-color: var(--card-background-light); /* #1E1E1E for dark mode */
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-container i {
+  font-size: 40px;
+  display: none;
+  color: var(--dark-grey); /* #424242 for light mode */
+}
+
+.dark-mode .image-container i {
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.service-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-row h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--accent); /* #FFC107 for light mode */
+}
+
+.dark-mode .title-row h3 {
+  color: var(--accent-blue); /* #0288D1 for dark mode */
+}
+
+.dropdown {
+  position: relative;
+  background-color: transparent;
+}
+
+.amber-dots {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.amber-dots i {
+  color: var(--accent); /* #FFC107 for light mode */
+  font-size: 20px;
+}
+
+.dark-mode .amber-dots i {
+  color: var(--amber-medium); /* #40C4FF for dark mode */
+}
+
+.service-card .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--card-background); /* #E0E0E0 for light mode */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 120px;
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-card .dropdown-menu.show {
+  display: block;
+}
+
+.dark-mode .service-card .dropdown-menu {
+  background-color: var(--dark-grey); /* #424242 for dark mode */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.service-card .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: var(--text-grey); /* #757575 for light mode */
+}
+
+.dark-mode .service-card .dropdown-item {
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.service-card .dropdown-item:hover {
+  background-color: var(--no-data-grey); /* #B0BEC5 for light mode hover */
+}
+
+.dark-mode .service-card .dropdown-item:hover {
+  background-color: var(--text-grey); /* #757575 for dark mode hover */
+}
+
+.amber-icon {
+  color: var(--accent); /* #FFC107 for light mode */
+}
+
+.dark-mode .amber-icon {
+  color: var(--amber-medium); /* #40C4FF for dark mode */
+}
+
+.red-icon {
+  color: var(--red-medium); /* #F44336 for both modes */
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.duration, .price {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.duration {
+  background-color: var(--card-background); /* #E0E0E0 for light mode */
+  color: var(--text-primary); /* #000000 for light mode */
+}
+
+.dark-mode .duration {
+  background-color: var(--card-background); /* #424242 for dark mode */
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.duration i {
+  margin-right: 4px;
+  color: var(--text-primary); /* #000000 for light mode */
+}
+
+.dark-mode .duration i {
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.price {
+  font-weight: bold;
+  background-color: var(--accent); /* #FFC107 for light mode */
+  color: var(--text-primary); /* #000000 (white in dark mode) */
+}
+
+.dark-mode .price {
+  background-color: var(--accent-blue); /* #0288D1 for dark mode */
+  color: var(--text-primary); /* #FFFFFF */
+}
+
+.description {
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-grey); /* #757575 for light mode */
+}
+
+.dark-mode .description {
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.book-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.book-button button {
+  width: 90px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: var(--white-background); /* #FFFFFF for light mode */
+  border: 2px solid var(--accent); /* #FFC107 for light mode */
+  color: var(--accent); /* #FFC107 for light mode */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark-mode .book-button button {
+  background-color: var(--card-background); /* #424242 for dark mode */
+  border: 2px solid var(--accent-blue); /* #0288D1 for dark mode */
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+/* Override Bootstrap btn-outline-primary */
+.btn-outline-primary {
+  border-color: var(--accent) !important; /* #FFC107 for light mode */
+  color: var(--accent) !important;
+  background-color: var(--white-background) !important; /* #FFFFFF for light mode */
+}
+
+.dark-mode .btn-outline-primary {
+  border-color: var(--accent-blue) !important; /* #0288D1 for dark mode */
+  color: var(--text-primary) !important; /* #FFFFFF for dark mode */
+  background-color: var(--card-background) !important; /* #424242 for dark mode */
+}
+
+.book-button button:hover {
+  background-color: var(--light-orange); /* #FFF3E0 for light mode hover */
+  border-color: var(--dark-orange); /* #E65100 for light mode hover */
+  color: var(--dark-orange); /* #E65100 for light mode hover */
+}
+
+.dark-mode .book-button button:hover {
+  background-color: var(--card-background-light); /* #1E1E1E for dark mode hover */
+  border-color: var(--primary-blue); /* #1976D2 for dark mode hover */
+  color: var(--text-primary); /* #FFFFFF for dark mode */
+}
+
+.add-button {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: var(--accent); /* #FFC107 for light mode */
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: var(--dark-orange); /* #E65100 for light mode hover */
+}
+
+.dark-mode .add-button {
+  background-color: var(--accent-blue); /* #0288D1 for dark mode */
+}
+
+.dark-mode .add-button:hover {
+  background-color: var(--primary-blue); /* #1976D2 for dark mode hover */
+}
+
+.add-button i {
+  font-size: 30px;
+  color: var(--text-primary); /* #000000 (white in dark mode) */
+}

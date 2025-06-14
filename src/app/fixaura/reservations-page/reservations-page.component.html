@@ -1,0 +1,80 @@
+<!-- reservations-page.component.html -->
+<div class="page">
+  <header class="app-bar">
+    <button class="back-btn" (click)="navigateToHome()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h1 class="title">Réservations Confirmées</h1>
+  </header>
+
+  <div class="content">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="!isLoading && errorMessage" class="error-container">
+      <i class="bi bi-wifi-off" style="color: var(--text-grey); font-size: 48px;"></i>
+      <p>{{ errorMessage }}</p>
+      <button class="retry-btn" (click)="loadReservations()">Réessayer</button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !errorMessage && confirmedReservations.length === 0" class="empty-state">
+      <i class="bi bi-calendar" style="color: var(--text-grey); font-size: 64px;"></i>
+      <p>Aucune réservation confirmée</p>
+      <p>Vos réservations confirmées apparaîtront ici</p>
+    </div>
+
+    <!-- List State -->
+    <div *ngIf="!isLoading && !errorMessage && confirmedReservations.length > 0" class="list-container" (swipe)="loadReservations()">
+      <div class="card" *ngFor="let reservation of confirmedReservations">
+        <!-- Card Header -->
+        <div class="card-header">
+          <h3>{{ reservation.service || 'Service non spécifié' }}</h3>
+          <div class="header-actions">
+            <button class="location-btn" (click)="sendLocationCard(reservation)">
+             <i class="bi bi-car-front-fill"></i>
+            </button>
+            <span class="status-badge">CONFIRMÉ</span>
+          </div>
+        </div>
+
+        <!-- Card Details -->
+        <div class="card-details">
+          <div class="avatar">
+            <img [src]="reservation.client.image && reservation.client.image !== '' ? getImageUrl(reservation.client.image) : 'https://via.placeholder.com/48'"
+                 (error)="handleImageError(reservation, $event)"
+                 (load)="logImageLoad(reservation.client.image || 'placeholder')"
+                 alt="Client Avatar">
+            <span class="debug-text" *ngIf="!reservation.client.image || reservation.client.image === ''">No image URL</span>
+          </div>
+          <div class="info">
+            <h4>{{ reservation.client.name }}</h4>
+            <p>{{ reservation.client.email }}</p>
+            <p><i class="bi bi-calendar"></i> {{ reservation.date | date: 'dd/MM/yyyy' }}</p>
+            <p><i class="bi bi-clock"></i> {{ reservation.date | date: 'HH:mm' }}</p>
+            <p><i class="bi bi-geo-alt"></i> {{ reservation.client.homeAddress }}</p>
+            <p *ngIf="reservation.client.phoneNumber"><i class="bi bi-phone"></i> {{ reservation.client.phoneNumber }}</p>
+            <p *ngIf="reservation.price"><i class="bi bi-cash"></i> {{ reservation.price | number: '1.2-2' }} TND</p>
+          </div>
+        </div>
+
+        <!-- Card Actions -->
+        <div class="card-actions">
+          <button class="cancel-btn" (click)="cancelReservation(reservation.id)">
+            <i class="bi bi-x-circle"></i> Annuler la réservation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-navbar
+  [currentIndex]="currentIndex"
+  [unreadMessagesCount]="unreadMessagesCount"
+  [userId]="userId"
+  [loggedId]="loggedId" 
+></app-navbar>
+</div>

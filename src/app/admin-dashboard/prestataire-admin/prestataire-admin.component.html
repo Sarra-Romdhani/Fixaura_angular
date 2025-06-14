@@ -1,0 +1,131 @@
+<div class="dashboard-container">
+  <mat-toolbar color="primary" class="navbar">
+    <div class="nav-links">
+      <a mat-button routerLink="/admin" routerLinkActive="active">Statistiques Générales</a>
+      <a mat-button routerLink="/clients" routerLinkActive="active">Gérer les Clients</a>
+      <a mat-button routerLink="/prestataires" routerLinkActive="active">Gérer les Prestataires</a>
+    </div>
+    <button mat-raised-button color="warn" class="logout-btn">Déconnexion</button>
+  </mat-toolbar>
+  <header>
+    <h1>Gestion des Prestataires</h1>
+  </header>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  <div class="charts">
+    <div class="chart-container">
+      <h3>Top Prestataires par Évaluation</h3>
+      <canvas id="topPrestatairesChart"></canvas>
+      <p *ngIf="!hasPrestatairesWithRating" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Statut des Prestataires (Signalés vs Non Signalés)</h3>
+      <canvas id="flaggedPrestatairesChart"></canvas>
+      <p *ngIf="!prestataires.length" class="no-data">Aucune donnée disponible</p>
+    </div>
+  </div>
+  <div class="table-section">
+    <h2>Liste des Prestataires Non Supprimés</h2>
+    <table mat-table [dataSource]="prestataires">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.name || 'Inconnu' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.email || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef>Évaluation</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.rating != null ? prestataire.rating : '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.status || 'actif' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="isFlagged">
+        <th mat-header-cell *matHeaderCellDef>Signalé</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.isFlagged ? 'Oui' : 'Non' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="flagCount">
+        <th mat-header-cell *matHeaderCellDef>Nombre de Signalements</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.flagCount || 0 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="flagReason">
+        <th mat-header-cell *matHeaderCellDef>Raison</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.flagReason || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="deactivationUntil">
+        <th mat-header-cell *matHeaderCellDef>Désactivé Jusqu'à</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.deactivationUntil ? (prestataire.deactivationUntil | date: 'short') : '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let prestataire">
+          <button *ngIf="!prestataire.isFlagged" mat-raised-button color="warn" (click)="onFlagAccount(prestataire._id)">Signaler</button>
+          <button mat-raised-button color="accent" (click)="onDelete(prestataire._id)">Supprimer</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="9">{{ errorMessage || 'Aucun prestataire disponible.' }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="table-section">
+    <h2>Liste des Prestataires Supprimés</h2>
+    <table mat-table [dataSource]="deletedPrestataires">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.name || 'Inconnu' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.email || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Statut</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="deletionReason">
+        <th mat-header-cell *matHeaderCellDef>Raison de Suppression</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.deletionReason || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="deletedAt">
+        <th mat-header-cell *matHeaderCellDef>Date de Suppression</th>
+        <td mat-cell *matCellDef="let prestataire">{{ prestataire.deletedAt | date: 'short' }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="deletedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: deletedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="5">Aucun prestataire supprimé disponible.</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="isFlagging" class="modal">
+    <div class="modal-content">
+      <h3>Signaler un Prestataire</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Raison du signalement</mat-label>
+        <input matInput [(ngModel)]="reason" placeholder="Raison du signalement" required />
+      </mat-form-field>
+      <div class="modal-buttons">
+        <button mat-raised-button color="primary" (click)="onConfirmFlag()">Confirmer</button>
+        <button mat-raised-button color="warn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isDeleting" class="modal">
+    <div class="modal-content">
+      <h3>Supprimer un Prestataire</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Raison de la suppression</mat-label>
+        <input matInput [(ngModel)]="reason" placeholder="Raison de la suppression" required />
+      </mat-form-field>
+      <div class="modal-buttons">
+        <button mat-raised-button color="primary" (click)="onConfirmDelete()">Confirmer</button>
+        <button mat-raised-button color="warn" (click)="closeModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.dialog-content {
+  padding: 16px;
+  color: #212121;
+}
+
+:host-context([data-theme="dark"]) {
+  .dialog-content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+}

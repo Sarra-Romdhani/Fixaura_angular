@@ -1,0 +1,71 @@
+<div class="container" [class.dark-mode]="isDarkMode">
+  <div *ngIf="isLoading" class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading && services.length === 0" class="no-services">
+    <p [style.color]="isDarkMode ? '#b0bec5' : '#757575'">
+      No services available
+    </p>
+    <button mat-raised-button class="refresh-button" (click)="fetchServices()">
+      Refresh
+    </button>
+  </div>
+  <div *ngIf="!isLoading && services.length > 0" class="services-list">
+    <div *ngFor="let service of services" class="service-card">
+      <div class="card-content">
+        <div class="image-container">
+          <img *ngIf="service.photo" [src]="baseUrl + service.photo" alt="Service Image"
+               (error)="handleImageError($event)">
+          <mat-icon *ngIf="!service.photo">photo</mat-icon>
+        </div>
+        <div class="service-details">
+          <div class="title-row">
+            <h3 [style.color]="isDarkMode ? '#ffffff' : '#212121'">
+              {{ service.title }}
+            </h3>
+            <mat-icon *ngIf="isOwner" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="showEditDialog(service)">
+                <mat-icon [style.color]="isDarkMode ? '#0288d1' : '#ff9800'">edit</mat-icon>
+                <span [style.color]="isDarkMode ? '#b0bec5' : '#757575'">Edit</span>
+              </button>
+              <button mat-menu-item (click)="showDeleteConfirmation(service.id)">
+                <mat-icon [style.color]="'#d32f2f'">delete</mat-icon>
+                <span [style.color]="isDarkMode ? '#b0bec5' : '#757575'">Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+          <div class="info-row">
+            <span class="duration"
+                  [style.backgroundColor]="isDarkMode ? '#424242' : '#e0e0e0'"
+                  [style.color]="isDarkMode ? '#ffffff' : '#212121'">
+              <mat-icon>schedule</mat-icon>
+              {{ service.estimatedDuration }} min
+            </span>
+            <span class="price"
+                  [style.backgroundColor]="isDarkMode ? '#0288d1' : '#ff9800'"
+                  [style.color]="isDarkMode ? '#ffffff' : '#ffffff'">
+              {{ service.price }} DT
+            </span>
+          </div>
+          <p [style.color]="isDarkMode ? '#b0bec5' : '#757575'">
+            {{ service.description }}
+          </p>
+        </div>
+      </div>
+      <div *ngIf="!isOwner" class="book-button">
+        <button mat-raised-button
+                [style.borderColor]="isDarkMode ? '#0288d1' : '#ffa726'"
+                [style.color]="isDarkMode ? '#0288d1' : '#ffa726'"
+                (click)="reserveService(service.id)">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+  <button *ngIf="isOwner" mat-fab class="add-button"
+          [style.backgroundColor]="isDarkMode ? '#0288d1' : '#ff9800'"
+          (click)="onAddPressed()">
+    <mat-icon [style.color]="isDarkMode ? '#ffffff' : '#ffffff'">add</mat-icon>
+  </button>
+</div>

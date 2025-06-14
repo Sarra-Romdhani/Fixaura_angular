@@ -1,0 +1,44 @@
+<div class="messages-container">
+  <div class="search-bar">
+    <i class="bi bi-search search-icon"></i>
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search clients or prestataires..."
+      [(ngModel)]="searchQuery"
+      (input)="filterConversations()"
+    />
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="!errorMessage && filteredConversations.length === 0" class="no-conversations">
+    No conversations yet
+  </div>
+
+  <mat-card
+    *ngFor="let conversation of filteredConversations"
+    class="conversation-card"
+    (click)="navigateToDiscussion(conversation.id)"
+  >
+    <div class="card-content">
+      <img
+        class="profile-image"
+        [src]="conversation.image || 'https://via.placeholder.com/40'"
+        alt="{{ conversation.name }}"
+      />
+      <div class="text-content">
+        <mat-card-title>{{ conversation.name }}</mat-card-title>
+        <mat-card-content>{{ conversation.lastMessage }}</mat-card-content>
+      </div>
+    </div>
+  </mat-card>
+
+<app-navbar
+  [currentIndex]="currentIndex"
+  [unreadMessagesCount]="unreadMessagesCount"
+  [userId]="userId"
+  [loggedId]="loggedId" 
+></app-navbar>
+</div>

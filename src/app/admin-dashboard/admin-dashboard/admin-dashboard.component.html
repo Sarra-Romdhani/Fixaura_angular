@@ -1,0 +1,69 @@
+<div class="dashboard-container">
+  <mat-toolbar color="primary" class="navbar">
+    <div class="nav-links">
+      <a mat-button routerLink="/admin" routerLinkActive="active">Statistiques Générales</a>
+      <a mat-button routerLink="/clients" routerLinkActive="active">Gérer les Clients</a>
+      <a mat-button routerLink="/prestataires" routerLinkActive="active">Gérer les Prestataires</a>
+    </div>
+      <button mat-raised-button color="warn" class="logout-btn" (click)="logout()">Déconnexion</button>
+  </mat-toolbar>
+  <!-- <mat-toolbar color="primary" class="navbar">
+    <div class="nav-links">
+      <a mat-button routerLink="/admin" routerLinkActive="active">Statistiques Générales</a>
+      <a mat-button routerLink="/clients" routerLinkActive="active">Gérer les Clients</a>
+      <a mat-button routerLink="/prestataires" routerLinkActive="active">Gérer les Prestataires</a>
+    </div>
+    <button mat-raised-button color="warn" class="logout-btn" (click)="logout()">Déconnexion</button>
+  </mat-toolbar> -->
+  <header>
+    <h1>Statistiques Générales</h1>
+  </header>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  <div class="stats-overview">
+    <mat-card class="stat-card">Total Clients: {{ stats.totalClients || 0 }}</mat-card>
+    <mat-card class="stat-card">Total Prestataires: {{ stats.totalPrestataires || 0 }}</mat-card>
+    <mat-card class="stat-card">Total Réservations: {{ stats.totalReservations || 0 }}</mat-card>
+  </div>
+  <div class="charts">
+    <div class="chart-container">
+      <h3>Totaux des Entités</h3>
+      <canvas id="totalsChart"></canvas>
+      <p *ngIf="!stats.totalClients && !stats.totalPrestataires && !stats.totalReservations" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Comptes Signalés vs Non Signalés</h3>
+      <canvas id="flaggedChart"></canvas>
+      <p *ngIf="clients.length === 0 && prestataires.length === 0" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Réservations par Date</h3>
+      <canvas id="reservationsOverTimeChart"></canvas>
+      <p *ngIf="!hasReservationsWithDate" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Distribution des Évaluations des Prestataires</h3>
+      <canvas id="ratingsChart"></canvas>
+      <p *ngIf="!hasPrestatairesWithRating" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Activité des Clients (Réservations)</h3>
+      <canvas id="clientActivityChart"></canvas>
+      <p *ngIf="!hasReservationsWithClient || clients.length === 0" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Popularité des Catégories</h3>
+      <canvas id="categoryPopularityChart"></canvas>
+      <p *ngIf="!hasCategoryData" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Top Prestataires par Évaluation</h3>
+      <canvas id="topPrestatairesChart"></canvas>
+      <p *ngIf="!hasPrestatairesWithRating" class="no-data">Aucune donnée disponible</p>
+    </div>
+    <div class="chart-container">
+      <h3>Distribution des Statuts des Réservations</h3>
+      <canvas id="reservationStatusChart"></canvas>
+      <p *ngIf="reservations.length === 0" class="no-data">Aucune donnée disponible</p>
+    </div>
+  </div>
+</div>

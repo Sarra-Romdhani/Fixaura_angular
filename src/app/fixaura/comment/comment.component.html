@@ -1,0 +1,224 @@
+<!-- <div class="w-full h-full bg-light-grey rounded-lg border border-light-grey relative dialog-container">
+  <div class="bg-light-grey p-2 rounded-t-lg relative">
+    <h2 class="text-base font-semibold text-dark-grey text-center">
+      Commentaires
+    </h2>
+    <button mat-icon-button (click)="dialogRef.close()" class="absolute top-1 right-1">
+      <i class="bi bi-x text-dark-grey text-lg"></i>
+    </button>
+  </div>
+
+  <div class="comment-list bg-light-grey p-1">
+    <div *ngIf="isLoadingUsers" class="flex justify-center items-center h-20">
+      <mat-spinner diameter="24" color="primary"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoadingUsers && publication.comments.length === 0" class="flex justify-center items-center h-20 text-dark-grey text-sm">
+      Aucun commentaire
+    </div>
+    <div *ngIf="!isLoadingUsers && publication.comments.length > 0">
+      <div *ngFor="let comment of publication.comments" class="mb-1">
+        <div class="flex items-start bg-white border border-light-grey rounded-lg p-2 relative comment-card">
+          <div *ngIf="comment.userId === loggedInUserId" class="absolute top-2 right-2">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="text-amber-600">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="startEditing(comment)">
+                <i class="bi bi-pencil text-amber-600 mr-2"></i>
+                <span class="text-black">Modifier</span>
+              </button>
+              <button mat-menu-item (click)="deleteComment(comment)">
+                <i class="bi bi-trash text-amber-600 mr-2"></i>
+                <span class="text-black">Supprimer</span>
+              </button>
+            </mat-menu>
+          </div>
+          <div class="flex items-center mr-3 flex-shrink-0">
+            <div class="avatar-container mr-2">
+              <img [src]="getUserImage(comment.userId)"
+                   alt="Avatar de {{ userCache.get(comment.userId)?.name || 'Utilisateur' }}"
+                   (error)="handleImageError($event)">
+              <i class="bi bi-person"
+                 [ngClass]="{'text-amber-600': userCache.get(comment.userId)?.type === 'prestataire'}"></i>
+            </div>
+            <span class="text-sm font-medium text-black">
+              {{ userCache.get(comment.userId)?.name || 'Utilisateur inconnu' }}
+            </span>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center mb-1">
+              <span *ngIf="userCache.get(comment.userId)?.type === 'prestataire' && userCache.get(comment.userId)?.job"
+                    class="text-xs px-1 py-0.5 bg-amber-100 text-amber-600 rounded-full">
+                {{ userCache.get(comment.userId)!.job }}
+              </span>
+            </div>
+            <div *ngIf="!isEditingComment(comment.id)">
+              <p class="text-sm text-black mb-1">
+                {{ comment.text }}
+              </p>
+              <p class="text-xs text-dark-grey">
+                {{ comment.createdAt | date:'dd MMM yyyy • HH:mm' }}
+              </p>
+            </div>
+            <div *ngIf="isEditingComment(comment.id)">
+              <mat-form-field appearance="outline" class="w-full textarea-bordered">
+                <textarea matInput [formControl]="editCommentControl" rows="4" class="h-32 text-sm p-2"></textarea>
+                <mat-error *ngIf="editCommentControl.hasError('required')">
+                  Le commentaire est requis
+                </mat-error>
+                <mat-error *ngIf="editCommentControl.hasError('minlength')">
+                  Minimum 3 caractères
+                </mat-error>
+                <mat-error *ngIf="editCommentControl.hasError('maxlength')">
+                  Maximum 500 caractères
+                </mat-error>
+                <mat-hint class="text-xs text-dark-grey">
+                  {{ userCache.get(loggedInUserId)?.editTextLength || 0 }}/500
+                </mat-hint>
+              </mat-form-field>
+              <div class="flex justify-end gap-2 mt-2">
+                <button mat-raised-button class="text-dark-grey" (click)="cancelEditing()">Annuler</button>
+                <button mat-raised-button class="bg-amber-600 text-white" [disabled]="editCommentControl.invalid" (click)="saveEditedComment(comment)">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed-input-area bg-light-grey p-2 flex items-center">
+    <form [formGroup]="commentForm" class="flex-1 flex items-center gap-2" (ngSubmit)="addComment()">
+      <mat-form-field appearance="outline" class="w-full textarea-bordered">
+        <textarea matInput formControlName="newComment" rows="1" placeholder="Écrire un commentaire..." class="h-10 text-sm p-2" (input)="logInput($event)"></textarea>
+        <mat-error *ngIf="commentForm.get('newComment')?.hasError('required')">
+          Le commentaire ne peut pas être vide
+        </mat-error>
+        <mat-error *ngIf="commentForm.get('newComment')?.hasError('minlength')">
+          Minimum 3 caractères
+        </mat-error>
+      </mat-form-field>
+      <button *ngIf="!isSending" mat-raised-button class="bg-amber-600 text-white submit-button" [disabled]="isSending || commentForm.invalid" (click)="addComment()">
+        <i class="bi bi-send-fill text-white text-lg mr-1"></i>Envoyer
+      </button>
+      <mat-spinner *ngIf="isSending" diameter="24" color="primary"></mat-spinner>
+    </form>
+  </div>
+</div> -->
+
+
+
+<div class="w-full h-full bg-light-grey rounded-lg border border-light-grey relative dialog-container">
+  <!-- Header -->
+  <div class="bg-light-grey p-2 rounded-t-lg relative">
+    <h2 class="text-base font-semibold text-dark-grey text-center">
+      Commentaires
+    </h2>
+    <button mat-icon-button (click)="dialogRef.close()" class="absolute top-1 right-1">
+      <i class="bi bi-x text-dark-grey text-lg"></i>
+    </button>
+  </div>
+
+  <!-- Comment List -->
+  <div class="comment-list bg-light-grey p-1">
+    <div *ngIf="isLoadingUsers" class="flex justify-center items-center h-20">
+      <mat-spinner diameter="24" color="primary"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoadingUsers && publication.comments.length === 0" class="flex justify-center items-center h-20 text-dark-grey text-sm">
+      Aucun commentaire
+    </div>
+    <div *ngIf="!isLoadingUsers && publication.comments.length > 0">
+      <div *ngFor="let comment of publication.comments" class="mb-1">
+        <div class="flex items-start bg-white border border-light-grey rounded-lg p-2 relative comment-card">
+          <!-- Three-dot menu -->
+          <div *ngIf="comment.userId === loggedInUserId" class="absolute top-2 right-2">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="text-amber-600">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="startEditing(comment)">
+                <i class="bi bi-pencil text-amber-600 mr-2"></i>
+                <span class="text-black">Modifier</span>
+              </button>
+              <button mat-menu-item (click)="deleteComment(comment)">
+                <i class="bi bi-trash text-amber-600 mr-2"></i>
+                <span class="text-black">Supprimer</span>
+              </button>
+            </mat-menu>
+          </div>
+          <!-- User image and name -->
+          <div class="flex items-center mr-3 flex-shrink-0">
+            <div class="avatar-container mr-2">
+              <img [src]="getUserImage(comment.userId)"
+                   alt="Avatar de {{ userCache.get(comment.userId)?.name || 'Utilisateur' }}"
+                   (error)="handleImageError($event)">
+              <i class="bi bi-person"
+                 [ngClass]="{'text-amber-600': userCache.get(comment.userId)?.type === 'prestataire'}"></i>
+            </div>
+            <span class="text-sm font-medium text-black">
+              {{ userCache.get(comment.userId)?.name || 'Utilisateur inconnu' }}
+            </span>
+          </div>
+          <!-- Comment content -->
+          <div class="flex-1">
+            <div class="flex items-center mb-1">
+              <span *ngIf="userCache.get(comment.userId)?.type === 'prestataire' && userCache.get(comment.userId)?.job"
+                    class="text-xs px-1 py-0.5 bg-amber-100 text-amber-600 rounded-full">
+                {{ userCache.get(comment.userId)!.job }}
+              </span>
+            </div>
+            <!-- Display comment or edit form -->
+            <div *ngIf="!isEditingComment(comment.id)">
+              <p class="text-sm text-black mb-1">
+                {{ comment.text }}
+              </p>
+              <p class="text-xs text-dark-grey">
+                {{ comment.timestamp | date:'dd MMM yyyy • HH:mm' }}
+              </p>
+            </div>
+            <div *ngIf="isEditingComment(comment.id)">
+              <mat-form-field appearance="outline" class="w-full textarea-bordered">
+                <textarea matInput [formControl]="editCommentControl" rows="4" class="h-32 text-sm p-2"></textarea>
+                <mat-error *ngIf="editCommentControl.hasError('required')">
+                  Le commentaire est requis
+                </mat-error>
+                <mat-error *ngIf="editCommentControl.hasError('minlength')">
+                  Minimum 3 caractères
+                </mat-error>
+                <mat-error *ngIf="editCommentControl.hasError('maxlength')">
+                  Maximum 500 caractères
+                </mat-error>
+                <mat-hint class="text-xs text-dark-grey">
+                  {{ userCache.get(loggedInUserId)?.editTextLength || 0 }}/500
+                </mat-hint>
+              </mat-form-field>
+              <div class="flex justify-end gap-2 mt-2">
+                <button mat-raised-button class="text-dark-grey" (click)="cancelEditing()">Annuler</button>
+                <button mat-raised-button class="bg-amber-600 text-white" [disabled]="editCommentControl.invalid" (click)="saveEditedComment(comment)">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Input Area -->
+  <div class="fixed-input-area bg-light-grey p-2 flex items-center">
+    <form [formGroup]="commentForm" class="flex-1 flex items-center gap-2" (ngSubmit)="addComment()">
+      <mat-form-field appearance="outline" class="w-full textarea-bordered">
+        <textarea matInput formControlName="newComment" rows="1" placeholder="Écrire un commentaire..." class="h-10 text-sm p-2" (input)="logInput($event)"></textarea>
+        <mat-error *ngIf="commentForm.get('newComment')?.hasError('required')">
+          Le commentaire ne peut pas être vide
+        </mat-error>
+        <mat-error *ngIf="commentForm.get('newComment')?.hasError('minlength')">
+          Minimum 3 caractères
+        </mat-error>
+      </mat-form-field>
+      <button *ngIf="!isSending" mat-raised-button class="bg-amber-600 text-white submit-button" [disabled]="isSending || commentForm.invalid" (click)="addComment()">
+        <i class="bi bi-send-fill text-white text-lg mr-1"></i>Envoyer
+      </button>
+      <mat-spinner *ngIf="isSending" diameter="24" color="primary"></mat-spinner>
+    </form>
+  </div>
+</div>

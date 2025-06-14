@@ -1,0 +1,565 @@
+/* Container fluid styles */
+.container-fluid {
+  background-color: var(--dark-grey); /* Light/Dark: #424242 */
+  min-height: 100vh;
+  padding: 20px;
+  padding-top: 70px; /* Add padding to avoid overlap with fixed app bar */
+}
+
+/* Override container-fluid background color in dark mode */
+:host-context(.dark-theme) .container-fluid {
+  background-color: #D3D3D3; /* Light grey background in dark mode */
+}
+
+/* App bar styles */
+.app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--dark-grey); /* Light/Dark: #424242 */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1100; /* Above modal (z-index: 1050) */
+  box-shadow: 0 2px 4px var(--shadow-grey);
+}
+
+/* Override app-bar background in dark mode */
+:host-context(.dark-theme) .app-bar {
+  background-color: var(--dark-grey); /* Keep dark grey for app-bar */
+}
+
+.app-bar .btn-link {
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  font-size: 24px;
+  padding: 8px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.app-bar .btn-link:hover {
+  background-color: var(--accent-blue, rgba(2, 136, 209, 0.1)); /* Blue hover in dark mode */
+  transform: scale(1.1);
+}
+
+.app-bar-title {
+  font-size: 20px;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  text-shadow: 2px 2px 4px var(--shadow-grey);
+  transform: perspective(500px) rotateX(5deg);
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Card styles */
+.card {
+  background: linear-gradient(135deg, var(--white-background) 0%, var(--card-background-light) 100%);
+  border: 2px solid var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  border-radius: 6px;
+  box-shadow: 0 3px 6px var(--shadow-grey);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override card background in dark mode */
+:host-context(.dark-theme) .card {
+  background: linear-gradient(135deg, var(--card-background) 0%, var(--card-background-light) 100%); /* #424242 to #1E1E1E */
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px var(--shadow-grey);
+}
+
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.image-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.image-container {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 2px solid var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  transition: transform 0.2s;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-container:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.data-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  transition: background-color 0.2s;
+  flex-grow: 1;
+}
+
+.data-item:hover {
+  background-color: var(--accent-blue, rgba(2, 136, 209, 0.1)); /* Blue hover in dark mode */
+  border-radius: 4px;
+}
+
+.data-item i {
+  font-size: 16px;
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+}
+
+.text-amber {
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+}
+
+.text-black {
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+}
+
+.text-white-70 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.text-danger {
+  color: var(--red-medium); /* Light/Dark: #F44336 */
+}
+
+.fs-4 {
+  font-size: 20px;
+}
+
+.mb-1 {
+  margin-bottom: 6px;
+}
+
+.mb-3 {
+  margin-bottom: 12px;
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+.image-title-container h5 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+}
+
+.btn-link {
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  text-decoration: none;
+  padding: 6px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.2s;
+  margin-right: 16px;
+}
+
+.btn-link.text-danger {
+  color: var(--red-medium); /* Light/Dark: #F44336 */
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.btn-link:hover {
+  background-color: var(--accent-blue, rgba(2, 136, 209, 0.1)); /* Blue hover in dark mode */
+  transform: scale(1.1);
+}
+
+.btn-link i {
+  font-size: 18px;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  display: flex;
+  gap: 6px;
+}
+
+.button-container .btn {
+  border: none;
+  background-color: transparent;
+}
+
+.spinner-border {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px var(--shadow-grey);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.fab:hover {
+  background-color: var(--amber-dark); /* Light: #FF8F00, Dark: #1565C0 */
+  transform: scale(1.1);
+}
+
+.fab i {
+  font-size: 20px;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal Styles */
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  overflow: auto;
+}
+
+.modal-dialog {
+  max-width: 400px;
+  margin: 1.75rem auto;
+  width: 100%;
+  padding-top: 230px;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, var(--white-background) 0%, var(--card-background-light) 100%);
+  border: 2px solid var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  border-radius: 6px;
+  box-shadow: 0 3px 6px var(--shadow-grey);
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  position: relative;
+}
+
+/* Override modal-content background in dark mode */
+:host-context(.dark-theme) .modal-content {
+  background: linear-gradient(135deg, var(--card-background) 0%, var(--card-background-light) 100%); /* #424242 to #1E1E1E */
+}
+
+.modal-header {
+  border-bottom: none;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+}
+
+.modal-body {
+  padding: 12px;
+  font-size: 14px;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-close-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 16px;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  padding: 6px;
+}
+
+.btn-close-icon:hover {
+  color: var(--red-medium); /* Light/Dark: #F44336 */
+  transform: scale(1.2);
+}
+
+.btn-secondary {
+  background-color: var(--text-grey); /* Light/Dark: #757575 */
+  border: none;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--medium-grey); /* Light/Dark: #B0BEC5 */
+}
+
+.btn-danger {
+  background-color: var(--red-medium); /* Light/Dark: #F44336 */
+  border: none;
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.btn-danger:hover {
+  background-color: #D32F2F; /* Slightly darker red */
+}
+
+/* Form field styles */
+mat-form-field {
+  width: 95%; /* Shortened inputs with space on sides */
+  margin-bottom: 16px;
+  color: var(--text-grey); /* Light/Dark: #757575 */
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+mat-form-field .mat-form-field-outline {
+  border: 1px solid var(--text-grey); /* Light/Dark: #757575 */
+  border-radius: 5px;
+}
+
+/* Override input text, labels, placeholders, and hints in dark mode */
+:host-context(.dark-theme) mat-form-field .mat-form-field-infix input,
+:host-context(.dark-theme) mat-form-field .mat-form-field-label,
+:host-context(.dark-theme) mat-form-field .mat-form-field-label .mat-label,
+:host-context(.dark-theme) mat-form-field .mat-hint,
+:host-context(.dark-theme) mat-form-field .mat-form-field-label-wrapper label {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+/* Ensure placeholder text is white in dark mode */
+:host-context(.dark-theme) mat-form-field .mat-form-field-infix input::placeholder {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+  opacity: 0.7; /* Slightly reduced opacity for better UX */
+}
+
+/* Ensure focused label is white in dark mode */
+:host-context(.dark-theme) mat-form-field.mat-focused .mat-form-field-label,
+:host-context(.dark-theme) mat-form-field.mat-focused .mat-form-field-label-wrapper label {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+/* Override form field outline in dark mode for better contrast */
+:host-context(.dark-theme) mat-form-field .mat-form-field-outline {
+  border-color: var(--medium-grey); /* #B0BEC5 for better contrast against #D3D3D3 */
+}
+
+/* Ensure mat-select text is white in dark mode */
+:host-context(.dark-theme) mat-select .mat-select-value,
+:host-context(.dark-theme) mat-select .mat-select-placeholder {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+/* Ensure standalone labels are white in dark mode */
+:host-context(.dark-theme) label {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+/* Prefix icon styles */
+.prefix-icon {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  z-index: 2;
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+  pointer-events: none;
+}
+
+/* Button styles */
+button[color="primary"] {
+  background-color: var(--primary); /* Light: #F5A623, Dark: #607D8B */
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 80px;
+  display: inline-block;
+}
+
+/* Override button text color in dark mode */
+:host-context(.dark-theme) button[color="primary"] {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+button[disabled] {
+  background-color: var(--medium-grey); /* Light/Dark: #B0BEC5 */
+  cursor: not-allowed;
+}
+
+/* Snackbar styles */
+:host ::ng-deep .success-snackbar {
+  background-color: var(--green-medium); /* Light/Dark: #4CAF50 */
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+}
+
+/* Override success snackbar text color in dark mode */
+:host-context(.dark-theme) ::ng-deep .success-snackbar {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+:host ::ng-deep .error-snackbar {
+  background-color: var(--red-medium); /* Light/Dark: #F44336 */
+  color: var(--text-primary); /* Light: #000000, Dark: #FFFFFF */
+}
+
+/* Override error snackbar text color in dark mode */
+:host-context(.dark-theme) ::ng-deep .error-snackbar {
+  color: var(--text-primary); /* #FFFFFF in dark mode */
+}
+
+/* Profile image container */
+.relative.mb-6 {
+  position: relative;
+  margin: 24px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.w-32.h-32 {
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.bg-gray-200 {
+  background-color: var(--card-background); /* Light: #E0E0E0, Dark: #424242 */
+}
+
+.flex.items-center.justify-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-5xl {
+  font-size: 48px;
+}
+
+.text-gray-500 {
+  color: var(--text-grey); /* Light/Dark: #757575 */
+}
+
+/* Form submit button container */
+.mt-8 {
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* Bootstrap icon adjustments */
+.bi {
+  font-size: 24px;
+}
+
+.section-title .bi {
+  margin-right: 12px;
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+}
+
+/* Icon color for inputs and titles */
+.text-blue-600 {
+  color: var(--accent); /* Light: #FFC107, Dark: #0288D1 */
+}
+
+/* Hide default file input text */
+input[type="file"]::-webkit-file-upload-button,
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+input[type="file"] {
+  color: transparent;
+}
+
+/* Padding in input fields to avoid overlap with icon */
+mat-form-field input {
+  padding-left: 30px !important;
+}
+
+/* Ensure image fills the circle completely */
+img.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}

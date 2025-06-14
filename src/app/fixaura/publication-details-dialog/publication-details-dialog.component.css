@@ -1,0 +1,191 @@
+.dialog-container {
+  background-color: var(--light-grey);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px var(--shadow-grey);
+  width: 600px;
+  max-width: 600px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.dark-mode .dialog-container {
+  background-color: var(--card-background);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dialog-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.dark-mode .dialog-title {
+  color: var(--accent-blue);
+  border-bottom: 2px solid var(--accent-blue);
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.image-container {
+  position: relative;
+  user-select: none;
+  width: 100%;
+  padding: 0; /* Remove any padding that might constrain image */
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  background-color: #f3f4f6; /* Light grey background to show image boundaries */
+}
+
+.dark-mode .carousel {
+  background-color: #374151; /* Dark grey for dark mode */
+}
+
+.carousel-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block; /* Ensure no inline spacing issues */
+  margin: 0 auto; /* Center image if narrower than container */
+}
+
+.image-placeholder {
+  width: 100%;
+  max-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-background);
+  border-radius: 12px;
+}
+
+.dark-mode .image-placeholder {
+  background-color: var(--card-background-light);
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--amber-dark);
+  color: var(--dark-grey);
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: var(--no-data-grey);
+}
+
+.dark-mode .nav-button {
+  background-color: var(--amber-dark);
+  color: var(--dark-grey);
+}
+
+.dark-mode .nav-button:hover {
+  background-color: var(--no-data-grey);
+}
+
+.nav-button.prev {
+  left: 8px;
+}
+
+.nav-button.next {
+  right: 8px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.carousel-indicators span {
+  width: 8px;
+  height: 8px;
+  background-color: var(--text-grey);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.carousel-indicators span.active {
+  background-color: var(--amber-dark);
+}
+
+.dark-mode .carousel-indicators span {
+  background-color: var(--text-primary);
+}
+
+.dark-mode .carousel-indicators span.active {
+  background-color: var(--accent-blue);
+}
+
+.details-section {
+  margin-top: 16px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.dark-mode .section-title {
+  color: var(--text-primary);
+}
+
+.section-content {
+  font-size: 14px;
+  color: var(--text-grey);
+  margin-top: 8px;
+}
+
+.dark-mode .section-content {
+  color: var(--text-primary);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 24px;
+}
+
+.close-button {
+  background-color: var(--amber-dark) !important;
+  color: var(--dark-grey) !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.dark-mode .close-button {
+  background-color: var(--dark-grey) !important;
+  color: var(--text-primary) !important;
+}
+
+.close-button:hover {
+  background-color: var(--no-data-grey) !important;
+}
+
+.dark-mode .close-button:hover {
+  background-color: var(--dark-grey) !important;
+}

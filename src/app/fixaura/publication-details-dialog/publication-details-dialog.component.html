@@ -1,0 +1,39 @@
+<div class="dialog-container">
+  <h2 class="dialog-title">{{ data.publication.title }}</h2>
+  <mat-dialog-content class="dialog-content">
+    <div class="image-container" (mousedown)="onTouchStart($event)" (mouseup)="onTouchEnd($event)" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+      <div *ngIf="data.publication.imageUrls && data.publication.imageUrls.length > 0; else placeholder" class="carousel">
+        <img [src]="normalizeImageUrl(data.publication.imageUrls[currentImageIndex])" class="carousel-image" alt="Publication image" (error)="handleImageError($event)">
+        <button class="nav-button prev" *ngIf="currentImageIndex > 0" (click)="prevImage()">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="nav-button next" *ngIf="data.publication.imageUrls && currentImageIndex < data.publication.imageUrls.length - 1" (click)="nextImage()">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+        <div class="carousel-indicators" *ngIf="data.publication.imageUrls && data.publication.imageUrls.length > 1">
+          <span *ngFor="let img of data.publication.imageUrls; let i = index" [ngClass]="{'active': i === currentImageIndex}"></span>
+        </div>
+      </div>
+      <ng-template #placeholder>
+        <div class="image-placeholder">
+          <i class="bi bi-image text-4xl text-gray-600"></i>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="details-section">
+      <h3 class="section-title">Description</h3>
+      <p class="section-content" style="word-break: break-word;">{{ data.publication.description }}</p>
+    </div>
+
+    <div class="details-section">
+      <h3 class="section-title">Details</h3>
+      <p class="section-content">Likes: {{ data.publication.likes.length }}</p>
+      <p class="section-content">Comments: {{ data.publication.comments.length }}</p>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button class="close-button" (click)="dialogRef.close()">Close</button>
+  </mat-dialog-actions>
+</div>

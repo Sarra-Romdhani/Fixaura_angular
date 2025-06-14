@@ -1,0 +1,65 @@
+<div class="page">
+  <header class="app-bar">
+    <button class="back-btn" (click)="navigateToHome()" aria-label="Retour à l'accueil">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h1 class="app-bar-title">Demandes en attente</h1>
+  </header>
+
+  <div class="content">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-spinner [diameter]="50" [style.stroke]="primaryColor"></mat-spinner>
+      <p class="loading-text">Chargement des demandes...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="!isLoading && errorMessage" class="error-container">
+      <i class="bi bi-exclamation-circle error-icon" aria-hidden="true"></i>
+      <p role="alert">Erreur de chargement : {{ errorMessage }}</p>
+      <button class="retry-btn" (click)="retry()" aria-label="Réessayer le chargement">Réessayer</button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !errorMessage && pendingReservations.length === 0" class="empty-state">
+      <i class="bi bi-bell-slash empty-icon" aria-hidden="true"></i>
+      <p>Aucune demande en attente</p>
+      <button class="action-btn" (click)="refreshData()" aria-label="Rafraîchir les données">Rafraîchir</button>
+    </div>
+
+    <!-- List State -->
+    <div *ngIf="!isLoading && !errorMessage && pendingReservations.length > 0" class="list-container" (swipe)="refreshData()">
+      <div class="card" *ngFor="let reservation of pendingReservations" role="region" [attr.aria-label]="'Demande de ' + reservation.client.name">
+        <div class="card-header">
+          <div class="avatar">
+            <img
+              *ngIf="hasValidImage(reservation)"
+              [src]="getImageUrl(reservation.client.image)"
+              alt="Avatar de {{ reservation.client.name }}"
+              class="profile-image"
+              (error)="onImageError($event, reservation.id)"
+              loading="lazy"
+            >
+            <i *ngIf="!hasValidImage(reservation)" class="bi bi-person placeholder-icon" aria-hidden="true"></i>
+          </div>
+          <div class="info">
+            <h3>{{ reservation.client.name }}</h3>
+            <p><i class="bi bi-clock" aria-hidden="true"></i> {{ reservation.date | date: 'HH:mm' }} - {{ (reservation.date.getTime() + 3600000) | date: 'HH:mm' }}</p>
+            <p><i class="bi bi-calendar" aria-hidden="true"></i> {{ reservation.date | date: 'dd MMMM yyyy' }}</p>
+            <p><i class="bi bi-geo-alt" aria-hidden="true"></i> {{ reservation.location }}</p>
+            <p><i class="bi bi-cash" aria-hidden="true"></i> {{ reservation.price ? (reservation.price | number: '1.2-2') + ' DT' : 'Prix non défini' }}</p>
+            <p><i class="bi bi-info-circle" aria-hidden="true"></i> Statut : {{ reservation.status }}</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>Service : {{ reservation.service || 'Non spécifié' }}</p>
+          <p *ngIf="reservation.request && reservation.request.length > 0">Demande : {{ reservation.request }}</p>
+        </div>
+        <div class="card-actions">
+          <button class="decline-btn" (click)="handleReservationAction(reservation.id, 'decline')" [attr.aria-label]="'Refuser la demande de ' + reservation.client.name">Refuser</button>
+          <button class="accept-btn" (click)="handleReservationAction(reservation.id, 'accept')" [attr.aria-label]="'Accepter la demande de ' + reservation.client.name">Accepter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="container-fluid p-4">
+  <div class="header d-flex align-items-center mb-4">
+    <button class="btn btn-link text-white p-0 me-2" (click)="navigateBack()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h1 class="text-white">{{ appliance?.modele || 'Détails de l\'appareil' }}</h1>
+  </div>
+  <div *ngIf="isLoading" class="text-center">
+    <span class="spinner-border text-amber"></span>
+  </div>
+  <div *ngIf="!isLoading && appliance">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="text-amber fw-bold">Détails de l'appareil</h5>
+        <hr class="border-white-50">
+        <div class="row">
+          <div class="col-auto">
+            <div class="image-container border border-amber rounded">
+              <img *ngIf="appliance.image" [src]="'data:image/jpeg;base64,' + appliance.image" class="img-fluid rounded" alt="Appliance">
+              <img *ngIf="!appliance.image" src="assets/images/placeholder.png" class="img-fluid rounded" alt="Placeholder">
+            </div>
+          </div>
+          <div class="col">
+            <p class="text-white mb-1">Modèle: {{ appliance.modele || 'Inconnu' }}</p>
+            <p class="text-white mb-1">Marque: {{ appliance.brand || 'N/A' }}</p>
+            <p class="text-white mb-1">Date d'achat: {{ formatDate(appliance.purchaseDate) }}</p>
+            <p class="text-white mb-1">Nombre de pannes: {{ appliance.breakdownCount || 0 }}</p>
+            <p class="text-white mb-1">Dernière panne: {{ formatDate(appliance.lastBreakdownDate) }}</p>
+            <p class="text-white mb-1">Dernier entretien: {{ formatDate(appliance.lastMaintenanceDate) }}</p>
+            <p class="text-white mb-1">Score de santé: {{ appliance.healthScore?.toFixed(1) || 'N/A' }}</p>
+            <p class="text-white mb-1">Statut: {{ appliance.prediction?.status || 'Inconnu' }}</p>
+            <p class="text-white mb-1">Confiance: {{ appliance.prediction?.confidence?.toFixed(1) || '0.0' }}%</p>
+            <p class="text-white mb-1">Prochain contrôle: {{ formatDate(appliance.prediction?.nextCheckDate) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5 class="text-amber fw-bold">Historique</h5>
+    <hr class="border-white-50">
+    <div *ngIf="history.length === 0" class="text-center text-white-70 fs-4">
+      Aucun historique trouvé
+    </div>
+    <div *ngFor="let record of history; let i = index" class="timeline-tile">
+      <div class="d-flex">
+        <div class="timeline-indicator">
+          <div class="indicator bg-amber border border-white rounded-circle"></div>
+          <div *ngIf="!isLast(i)" class="timeline-line bg-amber"></div>
+        </div>
+        <div class="card ms-3 mb-3 w-100">
+          <div class="card-body">
+            <p class="text-amber fw-bold mb-1">Date: {{ formatDate(record.timestamp) }}</p>
+            <p class="text-white mb-1">Statut: {{ record.status || 'Inconnu' }}</p>
+            <p class="text-white mb-1">Confiance: {{ record.confidence?.toFixed(1) || '0.0' }}%</p>
+            <p class="text-white mb-1">Prochain contrôle: {{ formatDate(record.nextCheckDate) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

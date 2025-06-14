@@ -1,0 +1,71 @@
+<!-- <div class="dialog-container" [class.dark-mode]="isDarkMode">
+  <h2>Update Service</h2>
+  <div class="image-picker">
+    <input type="file" accept="image/*" (change)="onFileChange($event)" id="imageInput" hidden>
+    <label for="imageInput" class="image-preview">
+      <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview">
+      <img *ngIf="!previewUrl && service.photo" [src]="baseUrl + service.photo" alt="Service Image">
+      <i *ngIf="!previewUrl && !service.photo" class="bi bi-camera"></i>
+    </label>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="service.title" class="input-text">
+    <i class="bi bi-fonts" matPrefix></i>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" [(ngModel)]="service.price" class="input-text">
+    <i class="bi bi-currency-dollar" matPrefix></i>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput [(ngModel)]="service.description" class="input-text">
+    <i class="bi bi-file-text" matPrefix></i>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Duration (min)</mat-label>
+    <input matInput type="number" [(ngModel)]="service.estimatedDuration" class="input-text">
+    <i class="bi bi-clock" matPrefix></i>
+  </mat-form-field>
+  <div class="button-row">
+    <button mat-raised-button class="cancel-button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button class="save-button" (click)="save()">Save</button>
+  </div>
+</div> -->
+
+<div class="dialog-container" [ngClass]="{'dark-mode': isDarkMode}">
+  <h2>Update Service</h2>
+  <div class="image-picker">
+    <input type="file" accept="image/*" (change)="onFileChange($event)" id="imageInput" hidden>
+    <label for="imageInput" class="image-preview">
+      <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview">
+      <img *ngIf="!previewUrl && service.photo" [src]="baseUrl + service.photo" alt="Service Image">
+      <i *ngIf="!previewUrl && !service.photo" class="bi bi-camera"></i>
+    </label>
+  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="service.title" class="input-text">
+    <i class="bi bi-fonts" matPrefix></i>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Price (TND)</mat-label>
+    <input matInput type="number" [(ngModel)]="service.price" class="input-text">
+    <i class="bi bi-currency-dollar" matPrefix></i>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <input matInput [(ngModel)]="service.description" class="input-text">
+    <i class="bi bi-file-text" matPrefix></i>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Duration (min)</mat-label>
+    <input matInput type="number" [(ngModel)]="service.estimatedDuration" class="input-text">
+    <i class="bi bi-clock" matPrefix></i>
+  </mat-form-field>
+  <div class="button-row">
+    <button mat-raised-button class="cancel-button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button class="save-button" (click)="save()">Save</button>
+  </div>
+</div>
