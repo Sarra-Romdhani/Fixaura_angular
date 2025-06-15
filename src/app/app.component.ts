@@ -80,7 +80,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ThemeService } from './services/theme.service';
+import { ThemeService } from './fixaura/services/theme.service';
 
 @Component({
   selector: 'app-root',
