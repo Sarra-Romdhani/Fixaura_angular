@@ -1,0 +1,154 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  padding: 40px 20px;
+  color: #333;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.content {
+  text-align: center;
+  padding: 30px 0;
+  width: 100%;
+}
+
+.content h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #8f8b8b;
+  margin-bottom: 10px;
+}
+
+.content p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 96%;
+  padding: 0 20px;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 20px;
+  color: #818080;
+  font-size: 20px;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 20px;
+  color: #818080;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 50px; /* Padding for both icons (left and right) */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-group input::placeholder {
+  color: #818080;
+}
+
+.input-group .error-message {
+  color: #d32f2f;
+  font-size: 12px;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.input-group .success-message {
+  color: #28a745;
+  font-size: 12px;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.input-group input.error {
+  border: 1px solid #d32f2f;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #ffc107;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #ffa807;
+}
+
+.login-link {
+  font-size: 14px;
+  color: #666;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.login-link a {
+  color: #f4a261;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .header {
+    padding: 20px;
+  }
+  .content {
+    padding: 20px 0;
+  }
+  .form {
+    padding: 0 10px;
+  }
+  .input-icon,
+  .toggle-icon {
+    left: 10px; /* Adjust for smaller screens */
+    right: 10px;
+  }
+  .input-group input {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}

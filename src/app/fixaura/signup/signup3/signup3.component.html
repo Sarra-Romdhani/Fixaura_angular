@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>FixAura</h1>
+  <form>
+    <div class="form-group">
+      <div class="input-icon">
+        <span class="icon lock-icon"></span>
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          name="password"
+          placeholder="Mot de passe"
+          [(ngModel)]="password"
+        />
+        <span class="icon eye-icon" (click)="togglePasswordVisibility()"></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-icon">
+        <span class="icon lock-icon"></span>
+        <input
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirmer le mot de passe"
+          [(ngModel)]="confirmPassword"
+        />
+        <span class="icon eye-icon" (click)="toggleConfirmPasswordVisibility()"></span>
+      </div>
+    </div>
+    <div class="button-group">
+      <button type="button" class="confirm-button" (click)="onConfirm()">Confirmer</button>
+    </div>
+    <div class="login-link">
+      <span>Vous avez déjà un compte ? <a href="#" (click)="onLogin()">Connectez-vous</a></span>
+    </div>
+  </form>
+</div>

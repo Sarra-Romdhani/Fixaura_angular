@@ -1,0 +1,26 @@
+<div class="header">
+  <h1>FixAura</h1>
+</div>
+<div class="content">
+  <h2>Vérification du code</h2>
+  <p>Un code de vérification a été envoyé à {{ email || 'votre email' }}</p>
+  <form (ngSubmit)="onVerifyCode()" class="form">
+    <div class="input-group">
+      <mat-icon class="input-icon">lock</mat-icon>
+      <input
+        type="text"
+        [(ngModel)]="code"
+        name="code"
+        placeholder="Code de vérification"
+        required
+        [class.error]="errorMessage"
+      />
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    </div>
+    <button type="submit" class="submit-button" (click)="onNext()">Vérifier le code</button>
+  </form>
+  <p class="resend-link">
+    Vous n'avez pas reçu le code ? <a (click)="onResendCode()">Renvoyer le code</a>
+  </p>
+</div>

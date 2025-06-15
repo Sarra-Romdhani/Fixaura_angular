@@ -1,0 +1,272 @@
+.search-container {
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #e7e6e6;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  max-width: none;
+}
+
+.search-bar mat-icon {
+  margin-right: 10px;
+  color: #757575;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 16px;
+  color: #292929;
+  background-color: #e7e6e6;
+  width: 100%;
+}
+
+.filter-buttons {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+
+.filter-buttons button {
+  border-radius: 20px;
+  background-color: #ffc107;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-buttons button mat-icon {
+  margin-right: 5px;
+}
+
+.job-dropdown {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+}
+
+.job-dropdown.visible {
+  display: block;
+}
+
+.no-jobs {
+  color: #757575;
+  font-size: 14px;
+  margin: 10px 0 0;
+  text-align: center;
+  display: none;
+}
+
+.no-jobs.visible {
+  display: block;
+}
+
+.custom-mat-select-panel {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  margin-top: 5px;
+  animation: slideDown 0.3s ease;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.job-option {
+  padding: 10px 15px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.job-option:hover {
+  background-color: #fff3e0;
+}
+
+.job-option.mat-selected {
+  background-color: #ffe082;
+  color: #333;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.price-slider {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-slider label {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.price-slider input[type="range"] {
+  width: 90%;
+  -webkit-appearance: none;
+  height: 10px;
+  background: #ddd;
+  outline: none;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
+.price-slider input[type="range"].max-price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #f44336;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.price-slider input[type="range"].max-price-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #f44336;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.loading-state {
+  margin: 20px 0;
+  color: #757575;
+  font-size: 16px;
+}
+
+.error-message {
+  margin: 20px 0;
+  color: #d32f2f;
+  font-size: 16px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.provider-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 90%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.provider-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #ffc107;
+}
+
+.provider-info h3 {
+  margin: 0;
+  color: #333;
+}
+
+.provider-info p {
+  margin: 5px 0;
+  color: #757575;
+}
+
+.provider-card button {
+  margin-left: auto;
+  border-radius: 20px;
+  background-color: #ffc107;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-results {
+  margin-top: 50px;
+  color: #757575;
+  width: 100%;
+  text-align: center;
+}
+
+.no-results mat-icon {
+  font-size: 48px;
+  color: #757575;
+}
+
+@media (max-width: 600px) {
+  .search-bar {
+    width: 100%;
+  }
+
+  .filter-buttons {
+    flex-direction: column;
+  }
+
+  .filter-buttons button {
+    margin: 5px 0;
+    width: 90%;
+  }
+
+  .job-dropdown {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .price-slider input[type="range"] {
+    width: 100%;
+  }
+
+  .provider-card {
+    width: 95%;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="header">
+  <h1>FixAura</h1>
+</div>
+<div class="content">
+  <h2>Réinitialiser le mot de passe</h2>
+  <p>Entrez l'adresse email associée à votre compte FixAura</p>
+  <form (ngSubmit)="onSendCode()" class="form">
+    <div class="input-group">
+      <mat-icon class="input-icon">email</mat-icon>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="Adresse email"
+        required
+        [class.error]="errorMessage"
+      />
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </div>
+    <button type="submit" class="submit-button" (click)="onNext()">Envoyer le code</button>
+  </form>
+  <p class="signup-link">
+    Pas de compte ? <a (click)="onSignUp()">Inscrivez-vous</a>
+  </p>
+</div>
