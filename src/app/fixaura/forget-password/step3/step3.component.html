@@ -1,0 +1,40 @@
+<div class="header">
+  <h1>FixAura</h1>
+</div>
+<div class="content">
+  <h2>Nouveau mot de passe</h2>
+  <p>Entrez votre nouveau mot de passe ci-dessous</p>
+  <form (ngSubmit)="onResetPassword()" class="form">
+    <div class="input-group">
+      <mat-icon class="input-icon">lock</mat-icon>
+      <input
+        [type]="showNewPassword ? 'text' : 'password'"
+        [(ngModel)]="newPassword"
+        name="newPassword"
+        placeholder="Nouveau mot de passe"
+        required
+        [class.error]="errorMessage"
+      />
+      <mat-icon class="toggle-icon" (click)="toggleNewPasswordVisibility()">
+        {{ showNewPassword ? 'visibility' : 'visibility_off' }}
+      </mat-icon>
+    </div>
+    <div class="input-group">
+      <mat-icon class="input-icon">lock</mat-icon>
+      <input
+        [type]="showConfirmPassword ? 'text' : 'password'"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirmer le mot de passe"
+        required
+        [class.error]="errorMessage"
+      />
+      <mat-icon class="toggle-icon" (click)="toggleConfirmPasswordVisibility()">
+        {{ showConfirmPassword ? 'visibility' : 'visibility_off' }}
+      </mat-icon>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    </div>
+    <button type="submit" class="submit-button">Réinitialiser le mot de passe</button>
+  </form>
+

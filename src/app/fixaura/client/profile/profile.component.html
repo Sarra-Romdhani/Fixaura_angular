@@ -1,0 +1,48 @@
+<div class="profile-container">
+  <div class="header">
+    <h1>Profil</h1>
+  </div>
+  <div class="loading-state" *ngIf="loading">
+    <p>Chargement du profil...</p>
+  </div>
+  <div class="error-message" *ngIf="errorMessage && !loading">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="user-card" *ngIf="!loading && !errorMessage">
+    <img [src]="user.image || 'assets/images/placeholder1.jpg'" alt="{{ user.name }}" class="user-image" (error)="onImageError()" />
+    <div class="user-info">
+      <h2>{{ user.name }}</h2>
+      <p>{{ user.phone }}</p>
+      <p>{{ user.email }}</p>
+      <p dir="rtl" class="address">{{ user.address }}</p>
+    </div>
+  </div>
+  <div class="options" *ngIf="!loading && !errorMessage">
+    <div class="option" (click)="openEditDialog()">
+      <mat-icon>edit</mat-icon> Modifier les informations personnelles
+    </div>
+    <div class="option">
+      <mat-icon>security</mat-icon> Sécurité
+    </div>
+    <div class="option">
+      <mat-icon>language</mat-icon> Langue
+      <select [(ngModel)]="user.language">
+        <option value="French">Français</option>
+        <option value="English">Anglais</option>
+        <option value="Arabic">Arabe</option>
+      </select>
+    </div>
+    <div class="option" (click)="navigateToHistorique()">
+      <mat-icon>history</mat-icon> Historique
+    </div>
+    <div class="option">
+      <mat-icon>star</mat-icon> Point cumulatif
+      <select>
+        <option value="0">0</option>
+      </select>
+    </div>
+    <div class="option" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon> Se déconnecter
+    </div>
+  </div>
+</div>

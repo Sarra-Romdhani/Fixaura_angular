@@ -1,0 +1,30 @@
+<div class="login-container">
+  <div class="logo-section">Logo introuvable</div>
+  <h2>Welcome To FixAura</h2>
+  
+<form class="login-form" (ngSubmit)="signIn()" [formGroup]="loginForm">
+  <div class="form-group input-with-icon">
+    <label for="email">Email</label>
+    <div class="input-container">
+      <i class="material-icons icon">email</i>
+      <input type="email" id="email" formControlName="email" placeholder="Enter email" required>
+    </div>
+  </div>
+
+  <div class="form-group input-with-icon">
+    <label for="password">Password</label>
+    <div class="input-container">
+      <i class="material-icons icon">lock</i>
+      <input [type]="isObscured ? 'password' : 'text'" id="password" formControlName="password" placeholder="Enter password" required>
+      <i class="material-icons toggle-eye" (click)="togglePasswordVisibility()">
+        {{ isObscured ? 'visibility_off' : 'visibility' }}
+      </i>
+    </div>
+  </div>
+
+  <button type="submit" class="sign-in-btn" >Sign In</button>
+  <a routerLink="/enter email" class="forgot-password" >Forgot password?</a>
+</form>
+
+<p class="signup-link">Don't have an account? <a routerLink="/first step" >Sign up</a></p>
+</div>

@@ -1,0 +1,35 @@
+<div class="historique-container">
+  <div class="header">
+    <a (click)="navigateToProfile()"><mat-icon>arrow_back</mat-icon></a>
+    <h1>Historique</h1>
+  </div>
+  <div class="filters">
+    <span class="filter" [class.active]="status === 'canceled'" (click)="setStatus('canceled')">Annulées</span>
+    <span class="filter" [class.active]="status === 'completed'" (click)="setStatus('completed')">Complétées</span>
+  </div>
+  <div class="loading-state" *ngIf="loading">
+    <p>Chargement des réservations...</p>
+  </div>
+  <div class="error-message" *ngIf="errorMessage && !loading">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="bookings" *ngIf="!loading && !errorMessage">
+    <div class="booking-card" *ngFor="let booking of bookings">
+      <div class="booking-info">
+        <div class="provider-image" style="background-color: #d8b4e2;"></div>
+        <div class="details">
+          <h2>{{ booking.service }}</h2>
+          <p><mat-icon>calendar_today</mat-icon> {{ booking.date }}</p>
+          <p><mat-icon>access_time</mat-icon> {{ booking.time }}</p>
+        </div>
+      </div>
+      <div class="status" [class.canceled]="booking.status === 'canceled'" [class.completed]="booking.status === 'completed'">
+        {{ booking.status === 'canceled' ? 'Annulée' : 'Complétée' }}
+      </div>
+      <button class="action-btn" (click)="onAction(booking.service, booking.action)">{{ booking.action === 'Rate' ? 'Évaluer' : 'Réserver à nouveau' }}</button>
+    </div>
+    <div *ngIf="bookings.length === 0">
+      <p>Aucune réservation trouvée pour ce filtre.</p>
+    </div>
+  </div>
+</div>

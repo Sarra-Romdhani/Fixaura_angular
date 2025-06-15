@@ -1,0 +1,27 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 10px 0;
+}
+
+.bottom-nav span {
+  cursor: pointer;
+  color: #757575;
+  text-align: center;
+  width: 50px;
+}
+
+.bottom-nav span mat-icon {
+  font-size: 24px;
+}
+
+.bottom-nav span.active mat-icon {
+  color: #ff9800; 
+}

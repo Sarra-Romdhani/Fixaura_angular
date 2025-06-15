@@ -1,0 +1,85 @@
+<div class="providers-section">
+  <div class="section-wrapper top-rated-section">
+    <h3>Prestataires mis en évidence</h3>
+    <div class="provider-grid" *ngIf="!loading && topRatedProviders.length > 0; else topRatedEmpty">
+      <div class="provider-card" *ngFor="let provider of topRatedProviders">
+        <img
+          [src]="provider.image || '/assets/images/default-provider.png'"
+          [alt]="provider.name"
+          class="provider-image"
+        />
+        <div class="provider-info">
+          <h4>{{ provider.name }}</h4>
+          <p>
+            {{ provider.job || provider.profession || 'Non spécifié' }}
+            <span *ngIf="provider.rating" class="rating">
+               {{ provider.rating | number: '1.1-1' }} étoiles
+            </span>
+            <span *ngIf="!provider.rating" class="no-rating"> - Non évalué</span>
+          </p>
+          <button mat-raised-button color="warn" (click)="onViewProfile(provider)">
+            Voir le profil
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #topRatedEmpty>
+      <div class="empty-state" *ngIf="!loading">
+        <mat-icon class="empty-icon">sentiment_dissatisfied</mat-icon>
+        <p>Aucun prestataire mis en évidence disponible.</p>
+      </div>
+    </ng-template>
+    <div class="loading-state" *ngIf="loading">
+      <div class="provider-card skeleton" *ngFor="let i of [1,2,3,4]">
+        <div class="skeleton-image"></div>
+        <div class="provider-info">
+          <div class="skeleton-text skeleton-title"></div>
+          <div class="skeleton-text"></div>
+          <div class="skeleton-button"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-wrapper all-providers-section">
+    <h3>Tous les prestataires</h3>
+    <div class="provider-grid" *ngIf="!loading && allProviders.length > 0; else allProvidersEmpty">
+      <div class="provider-card" *ngFor="let provider of allProviders">
+        <img
+          [src]="provider.image || '/assets/images/default-provider.png'"
+          [alt]="provider.name"
+          class="provider-image"
+        />
+        <div class="provider-info">
+          <h4>{{ provider.name }}</h4>
+          <p>
+            {{ provider.job || provider.profession || 'Non spécifié' }}
+            <span *ngIf="provider.rating" class="rating">
+               {{ provider.rating | number: '1.1-1' }} étoiles
+            </span>
+            <span *ngIf="!provider.rating" class="no-rating"> - Non évalué</span>
+          </p>
+          <button mat-raised-button color="warn" (click)="onViewProfile(provider)">
+            Voir le profil
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #allProvidersEmpty>
+      <div class="empty-state" *ngIf="!loading">
+        <mat-icon class="empty-icon">sentiment_dissatisfied</mat-icon>
+        <p>Aucun prestataire disponible.</p>
+      </div>
+    </ng-template>
+    <div class="loading-state" *ngIf="loading">
+      <div class="provider-card skeleton" *ngFor="let i of [1,2,3,4]">
+        <div class="skeleton-image"></div>
+        <div class="provider-info">
+          <div class="skeleton-text skeleton-title"></div>
+          <div class="skeleton-text"></div>
+          <div class="skeleton-button"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
